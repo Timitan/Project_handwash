@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 "lmao" 
 hello there 
 
 this is test file 
 
->>>>>>> 4a5b9f04989d56820bb6add3ecce6fd4e77fda6a
+more tests
