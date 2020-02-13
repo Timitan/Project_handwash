@@ -4,7 +4,11 @@ hello testsrwefwefe
 wefwef
 
 hello testsre 
-fisjsd
+
 this shou;d creata a confluict.
+<<<<<<< HEAD
 something something something
 thing thing thing
+=======
+ wefwefopwek pwefsomething something something
+>>>>>>> 40f7a68a87d8b2d69f028d57ea7364da2350eb16
