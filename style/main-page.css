@@ -1,5 +1,8 @@
 #handDiv {
-    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
 }
 
 #hand{
@@ -26,4 +29,38 @@
     background-color: #343A40;
     color: white;
     text-align: center;
+}
+
+/* The side navigation menu */
+#mySideNav {
+    width: 100%; /* 100% Full-height */
+    height: 0vh; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    bottom: 0; /* Stay at the top */
+    background-color: #111; /* Black*/
+    overflow-x: hidden;  /*Disable horizontal scroll */
+    padding-top: 0px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sideNav h1 {
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+/* The navigation menu links */
+.sideNav ul li {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
 }

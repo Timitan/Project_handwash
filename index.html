@@ -10,7 +10,7 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
   <!-- Our stylesheet-->
-  <link rel="stylesheet" href="style/main-page.css">
+  <link rel="stylesheet" href="style/main-page.css"">
 </head>
 
 <body>
@@ -41,9 +41,18 @@
     </div>
   </nav>
 
-  <button type="button" class="btn btn-light btn-outline-secondary btn-sm float-right">
-     <img id="shop-button" src="images/shop_icon.png" alt="Shop-button">
+  <!-- Shop -->
+  <button type="button" onclick="toggleShop()" class="btn btn-light btn-outline-light btn-sm float-right">
+     <img id="shop-button"  src="images/shop_icon.png" alt="Shop-button">
   </button>
+
+  <!-- Shop Menu-->
+  <div id="mySideNav" class="sideNav">
+    <h1>Shop</h1>
+    <ul>
+      <li>Soap</li>
+    </ul>
+  </div>
 
   <!-- Hand -->
   <div id="handDiv">
@@ -53,10 +62,6 @@
   <footer class="footer">
 
   </footer>
-
-  <style>
-
-  </style>
 
   <!--Bootstrap JavaScript-->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -74,7 +79,7 @@
   <script src="/__/firebase/7.9.1/firebase-firestore.js"></script>
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
   <!-- Our JavaScript-->
-  <script src="script/dummy.js"></script>
+  <script src="script/gameplay.js"></script>
 </body>
 
 </html>
