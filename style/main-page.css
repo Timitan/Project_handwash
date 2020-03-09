@@ -1,23 +1,58 @@
 #handDiv {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 75%;
+    text-align: center;
+    width: 100%;
+    position: fixed;
 }
 
-#hand{
+#hand {
+    position: relative;
     width: 45vh;
     outline: none;
+    z-index: 0;
 }
 
 /* Makes highlighting elements not possible*/
-::selection{
+::selection {
     color: none;
     background: none;
 }
 
-#shop-button{
-    width: 8vh;
+#shop-img {
+    width: 6vh;
+}
+
+/* Properties for button.*/
+#shop-button {
+    position: relative;
+    float: right;
+    outline: none;
+    padding: 15px 25px;
+    background-color: grey;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 9px lightgray;
+    z-index: 1;
+}
+
+/* Properties for button when hovered over.*/
+#shop-button:hover {
+    background-color: grey
+}
+
+/* Properties for button when pressed.*/
+#shop-button:active {
+    background-color: grey;
+    box-shadow: 0px 5px lightgray;
+    transform: translateY(4px);
+}
+
+/* Flexbox for displaying content.*/
+.info-head{
+    /* Property to toggle the flex box property.*/
+    display:flex;
+    height: 10vh;
+    /* Organizes items in the flex box with space between the items.*/
+    justify-content: space-between;
 }
 
 .footer {
@@ -33,19 +68,28 @@
 
 /* The side navigation menu */
 #mySideNav {
-    width: 100%; /* 100% Full-height */
-    height: 0vh; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
-    bottom: 0; /* Stay at the top */
-    background-color: #111; /* Black*/
-    overflow-x: hidden;  /*Disable horizontal scroll */
-    padding-top: 0px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    width: 100%;
+    /* 100% Full-width */
+    height: 0vh;
+    /* 0 height- change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Stay on top */
+    bottom: 0;
+    /* Stay at the bottom */
+    background-color: #111;
+    /* Black*/
+    overflow-x: hidden; 
+    /*Disable horizontal scroll */
+    padding-top: 0px;
+    /* Place content 60px from the top */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in the sidenav */
 }
 
 /* The navigation menu links */
-.sideNav h1 {
+#mySideNav h1 {
     display: block;
     color: #f2f2f2;
     text-align: center;
@@ -54,13 +98,16 @@
     font-size: 30px;
 }
 
-/* The navigation menu links */
-.sideNav ul li {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
+#mySideNav ul li {
+    padding: 8px 8px 8px 8px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
 }
+    
+#mySideNav ul li:hover {
+    color: #dbdbdb;
+}
+
