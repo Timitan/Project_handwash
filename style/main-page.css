@@ -2,6 +2,7 @@
     text-align: center;
     width: 100%;
     position: fixed;
+    transition: 0.3s;
 }
 
 #hand {
@@ -9,6 +10,11 @@
     width: 45vh;
     outline: none;
     z-index: 0;
+    transition: 0.08s;
+}
+
+#hand:active {
+    width: 43vh;
 }
 
 /* Makes highlighting elements not possible*/

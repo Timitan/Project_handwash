@@ -10,3 +10,11 @@ function toggleShop(){
         shopMenu.style.height = closedHeight;
     }
 }
+
+function incrementScore(){
+    let scoreDisplay = document.getElementById("money-display");
+    let money = scoreDisplay.innerHTML.slice(1);
+    money++;
+    scoreDisplay.innerHTML = "$ " + money;
+
+}
