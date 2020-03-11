@@ -114,6 +114,12 @@
 .abilityDesc{
     font-size: 10px;
 }
+.shopPic{
+    border-radius:50%;
+    width:10%;
+    height:10%;
+    
+}
     
 #mySideNav ul li:hover {
     color: #dbdbdb;
