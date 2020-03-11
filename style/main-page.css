@@ -103,14 +103,16 @@
     text-decoration: none;
     font-size: 30px;
 }
-
-#mySideNav ul li {
+.abilityName{
     padding: 8px 8px 8px 8px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
     display: block;
     transition: 0.3s;
+}
+.abilityDesc{
+    font-size: 10px;
 }
     
 #mySideNav ul li:hover {
