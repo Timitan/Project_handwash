@@ -31,6 +31,9 @@
         <li class="nav-item active">
           <a class="nav-link text-white" href="#">Options<span class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item" id="loginButton">
+          <a class="nav-link text-white" onclick=loginMenu()>Login</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link text-white" href="#">Statistics</a>
         </li>
@@ -79,7 +82,6 @@
 
   <!-- Login Box-->
   <div id="firebaseui-auth-container"></div>
-  <div id="loader">Loading...</div>
 
   <!--Bootstrap JavaScript-->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -136,7 +138,7 @@
                             email: user.email
                         }).then(function () {
                             console.log("New user added to firestore");
-                            //window.location.assign("index.html");
+                            window.location.assign("index.html");
                         })
                         .catch(function (error) {
                             console.log("Error adding new user: " + error);
@@ -149,12 +151,12 @@
             uiShown: function () {
                 // The widget is rendered.
                 // Hide the loader.
-                document.getElementById('loader').style.display = 'none';
+                //document.getElementById('loginButton').style.display = 'none';
             }
         },
         // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-        signInFlow: 'popup',
-        signInSuccessUrl: 'index.html',
+        signInFlow: 'redirect',
+        signInSuccessUrl: "index.html",
         signInOptions: [
             // Leave the lines as is for the providers you want to offer your users.
             //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -165,14 +167,17 @@
             //firebase.auth.PhoneAuthProvider.PROVIDER_ID
         ],
         // Terms of service url.
-        tosUrl: 'index.html',
+        tosUrl: "index.html",
         // Privacy policy url.
-        privacyPolicyUrl: 'index.html',
+        privacyPolicyUrl: "index.html",
         accountChooserEnabled: false
     };
     // The start method will wait until the DOM is loaded.
     // Inject the login interface into the HTML
-    ui.start('#firebaseui-auth-container', uiConfig);
+    //ui.start('#firebaseui-auth-container', uiConfig);
+    function loginMenu(){
+        ui.start('#firebaseui-auth-container', uiConfig);
+    }
 </script>
 
 </body>

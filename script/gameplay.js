@@ -16,5 +16,5 @@ function incrementScore(){
     let money = scoreDisplay.innerHTML.slice(1);
     money++;
     scoreDisplay.innerHTML = "$ " + money;
-
 }
+
