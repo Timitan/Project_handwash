@@ -49,7 +49,6 @@
     <div>
       <h1 id="money-display">$ 0 </h1>
     </div>
-    <div id="message"></div>
     <div>
       <button type="button" onclick="toggleShop()" id="shop-button">
         <img id="shop-img" src="images/shop_icon.png" alt="shop-img">
@@ -57,6 +56,10 @@
     </div>
   </div>
 
+  <div id="displayMessage">
+    <button id="closeButton" onclick="closeMessage()">X</button>
+    <h2 id="displayName"></h2>
+  </div>
 
   <!-- Shop Menu-->
   <div id="mySideNav">
@@ -111,7 +114,6 @@
 
   <!-- Login Box-->
   <div id='firebaseui-auth-container'></div>
-  <div id="displayName"></div>
 
   <!--Bootstrap JavaScript-->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
