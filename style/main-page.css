@@ -40,6 +40,22 @@
     z-index: 1;
 }
 
+#displayMessage{
+    height: 50vh;
+    width: 100%;
+    position: fixed;
+    text-align: center;
+    background: rgba(185, 185, 185, 0);
+    display: none;
+    transition: 0.3s;
+    z-index: 2;
+}
+
+#displayName {
+    color: white;
+    text-shadow: 2px 2px 2px black;
+}
+
 /* Properties for button when hovered over.*/
 #shop-button:hover {
     background-color: grey
