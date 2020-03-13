@@ -49,6 +49,7 @@
     <div>
       <h1 id="money-display">$ 0 </h1>
     </div>
+
     <div>
       <button type="button" onclick="toggleShop()" id="shop-button">
         <img id="shop-img" src="images/shop_icon.png" alt="shop-img">
@@ -63,26 +64,43 @@
 
   <!-- Shop Menu-->
   <div id="mySideNav">
+    <a class="closeButton" onclick="toggleShop()">&times;</a>
     <h1>Shop</h1>
+    <div>
+      <img class="shopPic" src="images/handSanitizer.jpg">
+      <h2>Hand Sanitizer</h2>
+      <p>Cleans the hand a bit</p>
+    </div>
+    <div>
+      <h2>Water</h2>
+    </div>
+
+    <!-- Replace list of items with div tags
     <ul>
-      <li class="abilityName">
+      <li>
         <img class="shopPic" src="images/handSanitizer.jpg">
         Hand Sanitizer
-        <p class="abilityDesc">Cleans the hand a bit</p>
+        <p>Cleans the hand a bit</p>
       </li>
-      <li class="abilityName">Water
+      <li>Water
         <p class="abilityDesc">Cleans the hand a lot</p>
       </li>
-      <li class="abilityName">Bar Soap</li>
-      <li class="abilityName">Liquid Soap</li>
-      <li class="abilityName">Alcohol</li>
-      <li class="abilityName">Radiation in a bottle</li>
+      <li>Bar Soap</li>
+      <li>Liquid Soap</li>
+      <li>Alcohol</li>
+      <li>Radiation in a bottle</li>
     </ul>
+    -->
   </div>
 
   <!-- Hand -->
-  <div id="handDiv" onclick="incrementScore()">
+  <div id="handDiv" onclick="handClickEventHandler()">
     <input id="hand" type="image" src="images/hand.png">
+  </div>
+
+  <!-- Cleanliness Health Bar-->
+  <div id="clean-bar-container">
+    <div id="clean-bar"></div>
   </div>
 
   <footer class="footer">
