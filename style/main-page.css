@@ -92,7 +92,7 @@
 #mySideNav {
     height: 100%;
     /* 100% Full-width */
-    width: 0vh;
+    width: 0vw;
     /* 0 height- change this with JavaScript */
     position: fixed;
     /* Stay in place */
@@ -100,7 +100,7 @@
     /* Stay on top */
     top: 0;
     /* Stay on the right */
-    left: 0;
+    right: 0;
     /* Stay at the bottom */
     background-color: rgba(48, 48, 48, 0.85);
     /* Black*/

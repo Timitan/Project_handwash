@@ -29,4 +29,8 @@ function closeMessage(){
     document.getElementById("displayMessage").style.display = "none";
 }
 
+function incrementClicks(){
+    console.log(firebase.auth().currentUser)
+}
+
 

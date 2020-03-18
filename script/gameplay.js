@@ -6,7 +6,7 @@ let clickGainHealthRate = 0.85;
 function toggleShop() {
     let shopMenu = document.getElementById("mySideNav")
     let height = shopMenu.style.width;
-    let openValue = "45vh";
+    let openValue = "40vh";
     let closedValue = "0vh";
 
     if (height == closedValue || height == "") {
@@ -40,6 +40,7 @@ function setHealth(value){
 function handClickEventHandler(){
     incrementScore();
     setHealth(clickGainHealthRate);
+    incrementClicks();
 }
 
 /* All the functions to be executed when the page is run.*/
