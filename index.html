@@ -49,6 +49,7 @@
     <div>
       <h1 id="money-display">$ 0 </h1>
     </div>
+
     <div>
       <button type="button" onclick="toggleShop()" id="shop-button">
         <img id="shop-img" src="images/shop_icon.png" alt="shop-img">
@@ -63,49 +64,53 @@
 
   <!-- Shop Menu-->
   <div id="mySideNav">
+    <a class="closeButton" onclick="toggleShop()">&times;</a>
     <h1>Shop</h1>
-    <ul>
-      <li class="abilityName">
-        <img class="shopPic" src="images/handSanitizer.jpg">
-        Hand Sanitizer
-        <p class="abilityDesc">Cleans the hand a bit</p>
-      </li>
-      <li class="abilityName">
-        <img class="shopPic" src="images/faucet.png">
-        Water
-        <p class="abilityDesc">Cleans the hand a lot</p>
-      </li>
-      <li class="abilityName">
-        <img class="shopPic" src="images/soap.jpg">
-        Soap Bar
-        <p class="abilityDesc">Scrubs the germs away</p>
-      </li>
-      <li class="abilityName">
-        <img class="shopPic" src="images/liquidSoap.png">
-        Liquid Soap
-        <p class="abilityDesc">Leaves your hands smelling minty</p>
-      </li>
-      <li class="abilityName">
-        <img class="shopPic" src="images/rubbingAlcohol.png">
-        Rubbing Alcohol
-        <p class="abilityDesc">Literally kills all of the germs</p>
-      </li>
-      <li class="abilityName">
-        <img class="shopPic" src="images/antiseptic.png">
-        Antiseptic
-        <p class="abilityDesc">What's used in the surgery room</p>
-      </li>
-      <li class="abilityName">
-        <img class="shopPic" src="">
-        Radiation in a bottle
-        <p class="abilityDesc">Overkill...</p>
-      </li>
-    </ul>
+    <div>
+      <img class="shopPic" src="images/handSanitizer.jpg">
+      <h2>Hand Sanitizer</h2>
+      <p class="abilityDesc">Cleans the hand a bit</p>
+    </div>
+    <div>
+      <img class="shopPic" src="images/faucet.png">
+      <h2>Water</h2>
+      <p class="abilityDesc">Cleans the hand a lot</p>
+    </div>
+    <div>
+      <img class="shopPic" src="images/soap.jpg">
+      <h2>Soap Bar</h2>
+      <p class="abilityDesc">Scrub the germs away</p>
+    </div>
+    <div>
+      <img class="shopPic" src="images/liquidSoap.png">
+      <h2>Liquid Soap</h2>
+      <p class="abilityDesc">Leaves your hands smelling minty</p>      
+    </div>
+    <div>
+      <img class="shopPic" src="images/rubbingAlcohol.png">
+      <h2>Rubbing Alcohol</h2>
+      <p class="abilityDesc">Literally kills all of the germs</p>
+    </div>
+    <div>
+      <img class="shopPic" src="images/antiseptic.png">
+      <h2>Antiseptic</h2>
+      <p class="abilityDesc">What's used in the surgery room</p>
+    </div>
+    <div>
+      <img class="shopPic" src="">
+      <h2>Radiation in a bottle</h2>
+      <p class="abilityDesc">Overkill...</p>
+    </div>
   </div>
 
   <!-- Hand -->
-  <div id="handDiv" onclick="incrementScore()">
+  <div id="handDiv" onclick="handClickEventHandler()">
     <input id="hand" type="image" src="images/hand.png">
+  </div>
+
+  <!-- Cleanliness Health Bar-->
+  <div id="clean-bar-container">
+    <div id="clean-bar"></div>
   </div>
 
   <footer class="footer">
