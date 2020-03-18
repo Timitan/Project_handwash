@@ -131,7 +131,7 @@
 }
 
 #mySideNav h2{
-    display: block;
+    display: inline;
     color: #f2f2f2;
     padding: 8px 8px 8px 8px;
     text-decoration: none;
@@ -160,8 +160,8 @@
 
 #mySideNav img{
     border-radius:50%;
-    width:10%;
-    height:10%; 
+    width:20%;
+    height:20%; 
 }
 
     
