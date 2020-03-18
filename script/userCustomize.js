@@ -30,7 +30,7 @@ function closeMessage(){
 }
 
 function incrementClicks(){
-    console.log(firebase.auth().currentUser)
+    console.log(firebase.auth().currentUser);
 }
 
 
