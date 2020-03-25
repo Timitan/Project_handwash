@@ -10,7 +10,7 @@ function toggleShop() {
     let shopMenu = document.getElementById("mySideNav");
     let shopBtn = document.getElementById("shop-button");
     let height = shopMenu.style.width;
-    let openValue = "60vw";
+    let openValue = "50vw";
     let closedValue = "0vw";
 
     if (height == closedValue || height == "") {
@@ -41,9 +41,10 @@ function setHealth(value) {
             }
         }
         
-        // Sets the health 
+        // Sets the health and logs the time
         userRef.update({
-                health: incRate
+                health: incRate,
+                date: new Date()
             })
             .then(function () {
                 // Execute after updating health variable
@@ -129,7 +130,7 @@ function setHandEventListener() {
 /* All the functions to be executed when the page is run.*/
 function gameStart() {
     /* Decrease health bar at a constant rate*/
-    let timerRate = 1000;
+    let timerRate = 20000;
     setInterval(function () {
         setHealth(-healthDecreaseRate);
     }, timerRate);

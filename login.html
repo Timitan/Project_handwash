@@ -70,7 +70,8 @@
                                 name: user.displayName,
                                 email: user.email,
                                 clicks: 0,
-                                health: 100
+                                health: 100,
+                                date: new Date()
                             }).then(function () {
                                 console.log("New user added to firestore");
                                 window.location.assign("index.html");
