@@ -52,5 +52,21 @@ function gameStart(){
 
 }
 
+function buyAbility(ability) {
+    switch (ability) {
+        case ("handSantizer"):
+            console.log("sanitizer was clicked");
+            break;
+        case ("water"):
+            console.log("water was clicked");
+            break;
+        case ("soap"):
+            console.log("soap was clicked");
+
+
+    }
+
+}
+
 
 gameStart();
