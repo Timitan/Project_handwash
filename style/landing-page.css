@@ -1,0 +1,38 @@
+h1{
+    text-align: center;
+    font-size: 50px;
+}
+
+h2{
+    text-align: center;
+    font-size: 35px;
+}
+
+div{
+    text-align: center;
+    width: 100%;
+}
+
+#login-button {
+    position: relative;
+    outline: none;
+    padding: 15px 25px;
+    background-color: lightgreen;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 9px green;
+    z-index: 1;
+    transition: 0.15s;
+}
+
+/* Properties for button when hovered over.*/
+#login-button:hover {
+    background-color: rgb(107, 216, 107);
+}
+
+/* Properties for button when pressed.*/
+#login-button:active {
+    background-color: rgb(107, 216, 107);;
+    box-shadow: 0px 5px green;
+    transform: translateY(4px);
+}

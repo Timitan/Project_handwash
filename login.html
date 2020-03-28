@@ -68,7 +68,17 @@
                     if (authResult.additionalUserInfo.isNewUser) {
                         db.collection("users").doc(user.uid).set({
                                 name: user.displayName,
-                                email: user.email
+                                email: user.email,
+                                clicks: 0,
+                                health: 100,
+                                ability1: 0,
+                                ability2: 0,
+                                ability3: 0,
+                                ability4: 0,
+                                ability5: 0,
+                                ability6: 0,
+                                ability7: 0,
+                                date: new Date()
                             }).then(function () {
                                 console.log("New user added to firestore");
                                 window.location.assign("index.html");

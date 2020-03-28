@@ -62,11 +62,17 @@
     <h2 id="displayName"></h2>
   </div>
 
+  <div id="jumbotron">
+    <h1 class="display-3">Would you like to </h1>
+    <button id="confirm">Yes</butotn>
+    <button id="deny">No</button>
+  </div>
+
   <!-- Shop Menu-->
   <div id="mySideNav">
     <a class="closeButton" onclick="toggleShop()">&times;</a>
     <h1>Shop</h1>
-    <div onclick="buyAbility('handSantizer')">
+    <div onclick="buyAbility('handSanitizer')">
       <img src="images/handSanitizer.jpg">
       <h2>Hand Sanitizer</h2>
       <p class="abilityDesc">Cleans the hand a bit</p>
@@ -104,7 +110,7 @@
   </div>
 
   <!-- Hand -->
-  <div id="handDiv" onclick="handClickEventHandler()">
+  <div id="handDiv">
     <input id="hand" type="image" src="images/hand.png">
   </div>
 
