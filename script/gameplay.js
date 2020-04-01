@@ -146,24 +146,28 @@ function gameStart() {
 
 
 function buyAbility(ability){
-    let scoreDisplay = document.getElementById("money-display");
+    let score = db.collection("users/").doc(user.uid).data()["score"];
     let increment = firebase.firestore.FieldValue.increment(rate);
     let confirm = document.createElement("div");
     confirm.style.width = "50px";
     confirm.style.height = "50px";
     switch (ability){
         case ("handSanitizer"):
-            if(scoreDisplay > 15){
-                console.log("you wanna buy this!");
+            if(score > 15){
             }
-            console.log("u clicked hands");
             break;
         case ("water"):
             if(score)
-            console.log("u clicked water");
             break;
         case ("soap"):
-            console.log("u clicked soap");
+            break;
+        case("liquidSoap"):
+            break;
+        case("rubbingAlcohol"):
+            break;
+        case("antiseptic"):
+            break;
+        case("radiation"):
             break;
         
     }
