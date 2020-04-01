@@ -2,6 +2,7 @@
 let healthValue = 100;
 let healthDecreaseRate = 0.5;
 let clickGainHealthRate = 2;
+let globalRate = 1;
 
 // A variable to indicate how much the score is increased by
 //let rate = 1;
@@ -90,8 +91,15 @@ function displayScore() {
                     x = d.data()["score"];
                 else
                     x = 0; // user has not played yet
+                
+                if (d.get("rate") != null)
+                    y = d.data()["rate"];
+                else
+                    y = 0;
 
                 // Displays the amount
+                console.log(y);
+                
                 let scoreDisplay = document.getElementById("money-display");
                 scoreDisplay.innerHTML = "$ " + x;
 
@@ -108,8 +116,8 @@ function setHandEventListener() {
             let userRef = db.collection('users').doc(user.uid);
 
             // Increment user's clicks and score
-            let rate = db.collection("users/").doc(user.uid).data()["rate"];
-            let incRate = firebase.firestore.FieldValue.increment(rate);
+            //let rate = db.collection("users/").doc(user.uid).data()["rate"];
+            let incRate = firebase.firestore.FieldValue.increment(globalRate);
             let clickInc = firebase.firestore.FieldValue.increment(1);
             userRef.update({
                     score: incRate,
@@ -146,8 +154,8 @@ function gameStart() {
 
 
 function buyAbility(ability){
-    let score = db.collection("users/").doc(user.uid).data()["score"];
-    let increment = firebase.firestore.FieldValue.increment(rate);
+    //let score = db.collection("users/").doc(user.uid).data()["score"];
+    //let increment = firebase.firestore.FieldValue.increment(rate);
     let confirm = document.createElement("div");
     confirm.style.width = "50px";
     confirm.style.height = "50px";
