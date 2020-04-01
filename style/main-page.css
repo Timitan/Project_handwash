@@ -1,8 +1,13 @@
+#body{
+    background-color: lightsteelblue;
+    
+}
 #handDiv {
     text-align: center;
     width: 100%;
     position: fixed;
     transition: 0.08s;
+    background-color: lightsteelblue;
 }
 
 #hand {
