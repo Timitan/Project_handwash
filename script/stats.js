@@ -12,7 +12,7 @@ function getClicks() {
                 .get().then(function (doc) {
                     if (doc.exists) {
                         console.log(doc.data());
-                        document.getElementById("clickCount").innerHTML = doc.data().clicks;
+                        document.getElementById("clickCount").innerHTML = "Number of clicks: " + doc.data().clicks;
                     } else {
                         // doc.data() will be undefined in this case
                         console.log("No such document!");

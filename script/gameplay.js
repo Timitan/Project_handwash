@@ -135,6 +135,7 @@ function setHandEventListener() {
 }
 
 
+
 // ####################################################################
 // Functions to call when opening webpage
 // ####################################################################
@@ -153,15 +154,9 @@ function gameStart() {
 }
 
 
-<<<<<<< HEAD
 function buyAbility(ability) {
     let score = db.collection("users/").doc(user.uid).data()["score"];
     let increment = firebase.firestore.FieldValue.increment(rate);
-=======
-function buyAbility(ability){
-    //let score = db.collection("users/").doc(user.uid).data()["score"];
-    //let increment = firebase.firestore.FieldValue.increment(rate);
->>>>>>> dd29140e009328697b6c5a74f59e7156ecac64b7
     let confirm = document.createElement("div");
     confirm.style.width = "50px";
     confirm.style.height = "50px";
