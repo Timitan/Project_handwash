@@ -31,16 +31,16 @@ function setHealth(value) {
         console.log(userRef);
 
         // Checks if the health value is over 100
-        if (healthValue > 100){
+        if (healthValue > 100) {
             incRate = 100;
-        } else{
-            if (healthValue < 0){
+        } else {
+            if (healthValue < 0) {
                 incRate = 0;
-            } else{
+            } else {
                 incRate = firebase.firestore.FieldValue.increment(value);
             }
         }
-        
+
         // Sets the health and logs the time
         userRef.update({
                 health: incRate,
@@ -145,33 +145,51 @@ function gameStart() {
 }
 
 
-function buyAbility(ability){
+function buyAbility(ability) {
     let score = db.collection("users/").doc(user.uid).data()["score"];
     let increment = firebase.firestore.FieldValue.increment(rate);
     let confirm = document.createElement("div");
     confirm.style.width = "50px";
     confirm.style.height = "50px";
-    switch (ability){
+    switch (ability) {
         case ("handSanitizer"):
-            if(score > 15){
-            }
+            if (score > 15) {}
             break;
         case ("water"):
-            if(score)
-            break;
+            if (score)
+                break;
         case ("soap"):
             break;
-        case("liquidSoap"):
+        case ("liquidSoap"):
             break;
-        case("rubbingAlcohol"):
+        case ("rubbingAlcohol"):
             break;
-        case("antiseptic"):
+        case ("antiseptic"):
             break;
-        case("radiation"):
+        case ("radiation"):
             break;
-        
     }
-    
+
 }
 
-gameStart();
+
+// ####################################################################
+// Functions to get number of clicks
+// ####################################################################
+function getClicks() {
+    //firebase.auth().onAuthStateChanged(user => {
+            //if (user) {
+                db.collection("users/").doc("zjZa12cXlFWCySmqqzF9N8LLt542").onSnapshot(
+                    function (snap) { //snap is just a name for what you captured
+                        //do something
+                        console.log(snap.data());
+                        document.getElementById("clickCount").innerHTML = snap.data().clicks;
+                    }
+                )
+            }
+      //  }
+    //}
+
+    getClicks();
+    
+    gameStart();
