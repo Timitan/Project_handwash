@@ -2,7 +2,7 @@
     text-align: center;
     width: 100%;
     position: fixed;
-    transition: 0.3s;
+    transition: 0.08s;
 }
 
 #hand {
@@ -10,7 +10,7 @@
     width: 45vh;
     outline: none;
     z-index: 0;
-    transition: 0.08s;
+    transition: 0.03s;
 }
 
 #hand:active {
@@ -34,10 +34,11 @@
     outline: none;
     padding: 15px 25px;
     background-color: grey;
+    right: 0;
     border: none;
-    border-radius: 15px;
     box-shadow: 0px 9px lightgray;
     z-index: 1;
+    transition: 0.5s;
 }
 
 #displayMessage{
@@ -58,7 +59,7 @@
 
 /* Properties for button when hovered over.*/
 #shop-button:hover {
-    background-color: grey
+    background-color: grey;
 }
 
 /* Properties for button when pressed.*/
@@ -91,25 +92,15 @@
 /* The side navigation menu */
 #mySideNav {
     height: 100%;
-    /* 100% Full-width */
-    width: 0vh;
-    /* 0 height- change this with JavaScript */
+    width: 0vw;
     position: fixed;
-    /* Stay in place */
     z-index: 1;
-    /* Stay on top */
     top: 0;
-    /* Stay on the right */
-    left: 0;
-    /* Stay at the bottom */
+    right: 0;
     background-color: rgba(48, 48, 48, 0.85);
-    /* Black*/
     overflow-x: hidden; 
-    /* Enable vertical scroll */
     padding-top: 0px;
-    /* Place content 60px from the top */
     transition: 0.5s;
-    /* 0.5 second transition effect to slide in the sidenav */
 }
 
 /* The navigation menu links */
@@ -189,4 +180,7 @@
     background-color: rgb(0, 206, 0);
     box-shadow: 0px 2px lightgreen;
     border-radius: 10px;
+}
+#buyAbilityConfirm{
+    
 }

@@ -4,7 +4,7 @@ let healthDecreaseRate = 0.5;
 let clickGainHealthRate = 2;
 
 // A variable to indicate how much the score is increased by
-let rate = 1;
+//let rate = 1;
 
 function toggleShop() {
     let shopMenu = document.getElementById("mySideNav");
@@ -86,8 +86,8 @@ function displayScore() {
             .onSnapshot(function (d) {
                 console.log("Current data: ", d.data());
                 // Check if the "clicks" variable is there
-                if (d.get("clicks") != null)
-                    x = d.data()["clicks"];
+                if (d.get("score") != null)
+                    x = d.data()["score"];
                 else
                     x = 0; // user has not played yet
 
@@ -107,10 +107,13 @@ function setHandEventListener() {
             setHealth(clickGainHealthRate);
             let userRef = db.collection('users').doc(user.uid);
 
-            // Increment user's clicks
+            // Increment user's clicks and score
+            let rate = db.collection("users/").doc(user.uid).data()["rate"];
             let incRate = firebase.firestore.FieldValue.increment(rate);
+            let clickInc = firebase.firestore.FieldValue.increment(1);
             userRef.update({
-                    clicks: incRate
+                    score: incRate,
+                    clicks: clickInc
                 })
                 .then(function () {
                     // Execute after updating health variable
@@ -141,9 +144,13 @@ function gameStart() {
     setHandEventListener();
 }
 
+
 function buyAbility(ability){
     let scoreDisplay = document.getElementById("money-display");
     let increment = firebase.firestore.FieldValue.increment(rate);
+    let confirm = document.createElement("div");
+    confirm.style.width = "50px";
+    confirm.style.height = "50px";
     switch (ability){
         case ("handSanitizer"):
             if(scoreDisplay > 15){
@@ -152,6 +159,7 @@ function buyAbility(ability){
             console.log("u clicked hands");
             break;
         case ("water"):
+            if(score)
             console.log("u clicked water");
             break;
         case ("soap"):
