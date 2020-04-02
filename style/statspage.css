@@ -1,4 +1,19 @@
 ul.hand-icon {
     list-style-image: url('/images/handicon.png');
-    
-    }
+    font-size: x-large;
+
+}
+
+.hand-icon {
+    margin-left: 2%;
+    margin-top: 2%;
+}
+
+.navbar {
+    background-color: #7597c5;
+    border-color: #E7E7E7;
+}
+
+#dashboard{
+    margin-top: 2%;
+}

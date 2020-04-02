@@ -3,6 +3,7 @@ let healthValue = 100;
 let healthDecreaseRate = 0.5;
 let clickGainHealthRate = 2;
 let globalRate = 1;
+let clickSound = new Audio("../sounds/hand_click.mp3");
 
 // A variable to indicate how much the score is increased by
 //let rate = 1;
@@ -114,7 +115,8 @@ function setHandEventListener() {
         firebase.auth().onAuthStateChanged(function (user) {
             setHealth(clickGainHealthRate);
             let userRef = db.collection('users').doc(user.uid);
-
+            /////Plays the sound/////
+            clickSound.play();
             // Increment user's clicks and score
             //let rate = db.collection("users/").doc(user.uid).data()["rate"];
             let incRate = firebase.firestore.FieldValue.increment(globalRate);
@@ -132,6 +134,7 @@ function setHandEventListener() {
                 });
         });
     });
+    
 }
 
 
