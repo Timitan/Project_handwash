@@ -116,8 +116,9 @@ function setHandEventListener() {
     document.getElementById("handDiv").addEventListener("mousedown", function (e) {
         firebase.auth().onAuthStateChanged(function (user) {
             setHealth(clickGainHealthRate);
-            //userID = firebase.auth().currentUser.uid;
+            userID = firebase.auth().currentUser.uid;
             let userRef = db.collection('users').doc(user.uid);
+            //userID = userRef;
             /////Plays the sound/////
             clickSound.play();
             // Increment user's clicks and score
@@ -159,67 +160,74 @@ function gameStart() {
     setHandEventListener();
 }
 function abilityCosts(ability) {
-    firebase.auth().onAuthStateChanged(function (user) {
-        db.collection("users/").doc(user.uid)
-            .onSnapshot(function (d) {
-                ability1 = d.data()["ability1"];
-                ability2 = d.data()["ability2"];
-                ability3 = d.data()["ability3"];
-                ability4 = d.data()["ability4"];
-                ability5 = d.data()["ability5"];
-                ability6 = d.data()["ability6"];
-                ability7 = d.data()["ability7"];
-            })
-        switch (ability) {
-            case ("ability1"):
-                if (ability1 == 0) {
-                    return 15;
+    let ability1;
+    let ability2;
+    let ability3;
+    let ability4;
+    let ability5;
+    let ability6;
+    let ability7;
+    db.collection("users/").doc(userID).get().then(function (d) {
+            ability1 = d.data()["ability1"];
+            ability2 = d.data()["ability2"];
+            ability3 = d.data()["ability3"];
+            ability4 = d.data()["ability4"];
+            ability5 = d.data()["ability5"];
+            ability6 = d.data()["ability6"];
+            ability7 = d.data()["ability7"];
+        })
+    switch (ability) {
+        case ("ability1"):
+            if (ability1 == 0) {
+                return 15;
+            } else {
+                return (Math.ceil(15 * Math.pow(1.15, ability1)));
+            }
+
+            case ("water"):
+                if (ability2 == 0) {
+                    return 100;
                 } else {
-                    return (Math.ceil(15 * Math.pow(1.15, ability1)));
+                    return (Math.ceil(100 * Math.pow(1.15, ability2)));
                 }
-
-                case ("water"):
-                    if (ability2 == 0) {
-                        return 100;
+                case ("soap"):
+                    if (ability3 == 0) {
+                        return 1100;
                     } else {
-                        return (Math.ceil(100 * Math.pow(1.15, ability2)));
+                        return (Math.ceil(1100 * Math.pow(1.15, ability3)));
                     }
-                    case ("soap"):
-                        if (ability3 == 0) {
-                            return 1100;
+                    case ("liquidSoap"):
+                        if (ability4 == 0) {
+                            return 12000;
                         } else {
-                            return (Math.ceil(1100 * Math.pow(1.15, ability3)));
+                            return (Math.ceil(12000 * Math.pow(1.15, ability4)));
                         }
-                        case ("liquidSoap"):
-                            if (ability4 == 0) {
-                                return 12000;
+                        case ("rubbingAlcohol"):
+                            if (ability5 == 0) {
+                                return 130000;
                             } else {
-                                return (Math.ceil(12000 * Math.pow(1.15, ability4)));
+                                return (Math.ceil(130000 * Math.pow(1.15, ability5)));
                             }
-                            case ("rubbingAlcohol"):
-                                if (ability5 == 0) {
-                                    return 130000;
+                            case ("antiseptic"):
+                                if (ability6 == 0) {
+                                    return 1400000;
                                 } else {
-                                    return (Math.ceil(130000 * Math.pow(1.15, ability5)));
+                                    return (Math.ceil(1400000 * Math.pow(1.15, ability6)));
                                 }
-                                case ("antiseptic"):
-                                    if (ability6 == 0) {
-                                        return 1400000;
+                                case ("radiation"):
+                                    if (ability7 == 0) {
+                                        return 20000000;
                                     } else {
-                                        return (Math.ceil(1400000 * Math.pow(1.15, ability6)));
+                                        return Math.ceil((20000000 * Math.pow(1.15, ability7)));
                                     }
-                                    case ("radiation"):
-                                        if (ability7 == 0) {
-                                            return 20000000;
-                                        } else {
-                                            return Math.ceil((20000000 * Math.pow(1.15, ability7)));
-                                        }
 
-        }
-    })
+    }
 }
 
 function buyAbility(ability) {
+    // this method isnt working yet
+    // purchasing abilities only works once of the fields change cause i dont know how to set it up so it sets the userID on load
+    // im using the firebase.auth().OnAuthChanged but i dont know a replacement for this
     let abilityPrice = abilityCosts(ability);
     //userID = firebase.auth().currentUser.uid;
     let confirm = document.getElementById("abilityConfirm");
@@ -227,15 +235,21 @@ function buyAbility(ability) {
     confirm.style.width = "100vw";
     confirm.style.height = "50vh";
     confirm.style.display = "inline";
-    confirm.style.backgroundColor = "black";
     confirm.style.zIndex = "2";
+    /** Checks which ability has been clicked and then checks if the user has enough points for the purchase
+     *  If the user has enough points, they are prompted with whether or not they wish to purchase the ability
+     *  if the user says yes then the ability is incremented by one and the score decremented by the 
+     *  price of the ability 
+     */
+// wont work yet since abilityPrice returns nothing
+// buttons are ugly
     switch (ability) {
         case ("ability1"):
             if (userScore < abilityPrice) {
                 notEnoughScore();
             } else {
                 confirm.innerHTML = "Would you like to buy this ability?<br>";
-                createButton("Yes", 50, ability, abilityPrice);
+                createButton("Yes", 10, ability, abilityPrice);
                 createButton("No", 50);
             }
             break;
@@ -254,7 +268,7 @@ function buyAbility(ability) {
             } else {
                 confirm.innerHTML = "Would you like to buy this ability?<br>";
                 createButton("Yes", 50, ability, abilityPrice);
-                createButton("No", 50);
+                createButton("No", 75);
             }
             break;
         case ("liquidSoap"):
@@ -263,7 +277,7 @@ function buyAbility(ability) {
             } else {
                 confirm.innerHTML = "Would you like to buy this ability?<br>";
                 createButton("Yes", 50, ability, abilityPrice);
-                createButton("No", 50);
+                createButton("No", 25);
             }
             break;
         case ("rubbingAlcohol"):
@@ -313,7 +327,7 @@ function buyAbility(ability) {
             button.addEventListener("click", function (user) {
                 firebase.auth().onAuthStateChanged(function (user) {
                     let plusOne = firebase.firestore.FieldValue.increment(1);
-                    let scoreDecrease = firebase.firestore.FieldValue.increment(-abilityPrice);
+                    let scoreDecrease = firebase.firestore.FieldValue.increment(abilityPrice);
                     let userRef = db.collection('users').doc(user.uid);
                     let abilityName = ability.toString();
                     userRef.update({
