@@ -4,6 +4,8 @@ let healthDecreaseRate = 0.5;
 let clickGainHealthRate = 2;
 let globalRate = 1;
 let clickSound = new Audio("../sounds/hand_click.mp3");
+let userScore;
+let userID;
 
 // A variable to indicate how much the score is increased by
 //let rate = 1;
@@ -33,7 +35,7 @@ function setHealth(value) {
         console.log(userRef);
 
         // Checks if the health value is over 100
-        if (healthValue > 100) {
+        if (healthValue >= 98) {
             incRate = 100;
         } else {
             if (healthValue < 0) {
@@ -100,7 +102,7 @@ function displayScore() {
 
                 // Displays the amount
                 console.log(y);
-                
+                userScore = x;
                 let scoreDisplay = document.getElementById("money-display");
                 scoreDisplay.innerHTML = "$ " + x;
 
@@ -114,6 +116,7 @@ function setHandEventListener() {
     document.getElementById("handDiv").addEventListener("mousedown", function (e) {
         firebase.auth().onAuthStateChanged(function (user) {
             setHealth(clickGainHealthRate);
+            //userID = firebase.auth().currentUser.uid;
             let userRef = db.collection('users').doc(user.uid);
             /////Plays the sound/////
             clickSound.play();
@@ -155,33 +158,180 @@ function gameStart() {
     displayHealth();
     setHandEventListener();
 }
+function abilityCosts(ability) {
+    firebase.auth().onAuthStateChanged(function (user) {
+        db.collection("users/").doc(user.uid)
+            .onSnapshot(function (d) {
+                ability1 = d.data()["ability1"];
+                ability2 = d.data()["ability2"];
+                ability3 = d.data()["ability3"];
+                ability4 = d.data()["ability4"];
+                ability5 = d.data()["ability5"];
+                ability6 = d.data()["ability6"];
+                ability7 = d.data()["ability7"];
+            })
+        switch (ability) {
+            case ("ability1"):
+                if (ability1 == 0) {
+                    return 15;
+                } else {
+                    return (Math.ceil(15 * Math.pow(1.15, ability1)));
+                }
 
+                case ("water"):
+                    if (ability2 == 0) {
+                        return 100;
+                    } else {
+                        return (Math.ceil(100 * Math.pow(1.15, ability2)));
+                    }
+                    case ("soap"):
+                        if (ability3 == 0) {
+                            return 1100;
+                        } else {
+                            return (Math.ceil(1100 * Math.pow(1.15, ability3)));
+                        }
+                        case ("liquidSoap"):
+                            if (ability4 == 0) {
+                                return 12000;
+                            } else {
+                                return (Math.ceil(12000 * Math.pow(1.15, ability4)));
+                            }
+                            case ("rubbingAlcohol"):
+                                if (ability5 == 0) {
+                                    return 130000;
+                                } else {
+                                    return (Math.ceil(130000 * Math.pow(1.15, ability5)));
+                                }
+                                case ("antiseptic"):
+                                    if (ability6 == 0) {
+                                        return 1400000;
+                                    } else {
+                                        return (Math.ceil(1400000 * Math.pow(1.15, ability6)));
+                                    }
+                                    case ("radiation"):
+                                        if (ability7 == 0) {
+                                            return 20000000;
+                                        } else {
+                                            return Math.ceil((20000000 * Math.pow(1.15, ability7)));
+                                        }
+
+        }
+    })
+}
 
 function buyAbility(ability) {
-    let score = db.collection("users/").doc(user.uid).data()["score"];
-    let increment = firebase.firestore.FieldValue.increment(rate);
-    let confirm = document.createElement("div");
-    confirm.style.width = "50px";
-    confirm.style.height = "50px";
+    let abilityPrice = abilityCosts(ability);
+    //userID = firebase.auth().currentUser.uid;
+    let confirm = document.getElementById("abilityConfirm");
+    //createButton("No", 50, 50, "red");
+    confirm.style.width = "100vw";
+    confirm.style.height = "50vh";
+    confirm.style.display = "inline";
+    confirm.style.backgroundColor = "black";
+    confirm.style.zIndex = "2";
     switch (ability) {
-        case ("handSanitizer"):
-            if (score > 15) {}
+        case ("ability1"):
+            if (userScore < abilityPrice) {
+                notEnoughScore();
+            } else {
+                confirm.innerHTML = "Would you like to buy this ability?<br>";
+                createButton("Yes", 50, ability, abilityPrice);
+                createButton("No", 50);
+            }
             break;
-        case ("water"):
-            if (score)
-                break;
+        case ("ability2"): 
+        if (userScore < abilityPrice) {
+            notEnoughScore();
+        } else {
+            confirm.innerHTML = "Would you like to buy this ability?<br>";
+            createButton("Yes", 50, ability, abilityPrice);
+            createButton("No", 50);
+        }
+        break;
         case ("soap"):
+            if (userScore < abilityPrice) {
+                notEnoughScore();
+            } else {
+                confirm.innerHTML = "Would you like to buy this ability?<br>";
+                createButton("Yes", 50, ability, abilityPrice);
+                createButton("No", 50);
+            }
             break;
         case ("liquidSoap"):
+            if (userScore < abilityPrice) {
+                notEnoughScore();
+            } else {
+                confirm.innerHTML = "Would you like to buy this ability?<br>";
+                createButton("Yes", 50, ability, abilityPrice);
+                createButton("No", 50);
+            }
             break;
         case ("rubbingAlcohol"):
+            if (userScore < abilityPrice) {
+                notEnoughScore();
+            } else {
+                confirm.innerHTML = "Would you like to buy this ability?<br>";
+                createButton("Yes", 50, ability, abilityPrice);
+                createButton("No", 50);
+            }
             break;
         case ("antiseptic"):
+            if (userScore < abilityPrice) {
+                notEnoughScore();
+            } else {
+                confirm.innerHTML = "Would you like to buy this ability?<br>";
+                createButton("Yes", 50, ability, abilityPrice);
+                createButton("No", 50);
+            }
             break;
         case ("radiation"):
+            if (userScore < abilityPrice) {
+                notEnoughScore();
+            } else {
+                confirm.innerHTML = "Would you like to buy this ability?<br>";
+                createButton("Yes", 50, ability, abilityPrice);
+                createButton("No", 50);
+            }
             break;
     }
 
+    //let increment = firebase.firestore.FieldValue.increment(rate);
+
+    function notEnoughScore() {
+        confirm.innerHTMl = "You do not have enough score for this ability!<br>";
+        createButton("Ok", 50);
+    }
+
+    function createButton(text, marginStart, ability, abilityPrice) {
+        let button = document.createElement("button");
+        button.setAttribute("id", "confirmButton");
+        button.style.marginInlineStart = marginStart + "%";
+        // Adds an event listener to buttons which have the ability param
+        //      this makes it so that the ability is incremented by one when
+        //      the button is clicked
+        if (ability != undefined) {
+            button.addEventListener("click", function (user) {
+                firebase.auth().onAuthStateChanged(function (user) {
+                    let plusOne = firebase.firestore.FieldValue.increment(1);
+                    let scoreDecrease = firebase.firestore.FieldValue.increment(-abilityPrice);
+                    let userRef = db.collection('users').doc(user.uid);
+                    let abilityName = ability.toString();
+                    userRef.update({
+                        abilityName: plusOne,
+                        score: scoreDecrease
+                    })
+                })
+            confirm.style.display = "none";
+            }) 
+        } else{
+            button.addEventListener("click", function(){
+                confirm.style.display = "none";
+            })
+        }
+        button.innerHTML = text;
+
+        confirm.appendChild(button);
+    }
 }
 
     

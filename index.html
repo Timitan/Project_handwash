@@ -14,6 +14,9 @@
 </head>
 
 <body id =  "body">
+  <div id="abilityConfirm">
+    
+  </div>
   <!-- Header -->
   <nav class=" navbar navbar-expand-lg navbar-light">
     <button class="navbar-toggler" type="button">
@@ -62,48 +65,46 @@
     <h2 id="displayName"></h2>
   </div>
 
-  <div id="abilityConfirm">
-    
-  </div>
+
 
   <!-- Shop Menu-->
   <div id="mySideNav">
     <a class="closeButton" onclick="toggleShop()">&times;</a>
     <h1>Shop</h1>
-    <div onclick="buyAbility('handSanitizer')">
+    <div onclick="buyAbility('ability1')">
       <img src="images/handSanitizer.jpg">
       <h2>Hand Sanitizer</h2>
-      <p class="abilityDesc">Cleans the hand a bit</p>
+      <p class="abilityDesc">Cleans the hand a bit<br>$<span id="firstAbilityCost">15</span></p>
     </div>
-    <div onclick="buyAbility('water')">
+    <div onclick="buyAbility('ability2')">
       <img src="images/faucet.png">
       <h2>Water</h2>
-      <p class="abilityDesc">Cleans the hand a lot</p>
+      <p class="abilityDesc">Cleans the hand a lot<br>$<span id="secondAbilityCost">100</span></p>
     </div>
-    <div onclick="buyAbility('soap')">
+    <div onclick="buyAbility('ability3')">
       <img src="images/soap.jpg">
       <h2>Soap Bar</h2>
-      <p class="abilityDesc">Scrub the germs away</p>
+      <p class="abilityDesc">Scrub the germs away<br>$<span id="thirdAbilityCost">1100</span></p>
     </div>
-    <div onclick="buyAbility('liquidSoap')">
+    <div onclick="buyAbility('ability4')">
       <img src="images/liquidSoap.png">
       <h2>Liquid Soap</h2>
-      <p class="abilityDesc">Leaves your hands smelling minty</p>      
+      <p class="abilityDesc">Leaves your hands smelling minty<br>$<span id="fourthAbilityCost">12000</span></p>      
     </div>
-    <div onclick="buyAbility('rubbingAlcohol')">
+    <div onclick="buyAbility('ability5')">
       <img src="images/rubbingAlcohol.png">
       <h2>Rubbing Alcohol</h2>
-      <p class="abilityDesc">Literally kills all of the germs</p>
+      <p class="abilityDesc">Literally kills all of the germs<br>$<span id="fifthAbilityCost">130000</span></p>
     </div>
-    <div onclick="buyAbility('antiseptic')">
+    <div onclick="buyAbility('ability6')">
       <img src="images/antiseptic.png">
       <h2>Antiseptic</h2>
-      <p class="abilityDesc">What's used in the surgery room</p>
+      <p class="abilityDesc">What's used in the surgery room<br>$<span id="sixthAbilityCost">1400000</span></p>
     </div>
-    <div onclick="buyAbility('radiation')">
+    <div onclick="buyAbility('ability7')">
       <img src="">
       <h2>Radiation in a bottle</h2>
-      <p class="abilityDesc">Overkill...</p>
+      <p class="abilityDesc">Overkill...<br>$<span id="seventhAbilityCost">20000000</span></p>
     </div>
   </div>
 
