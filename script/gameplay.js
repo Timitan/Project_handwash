@@ -35,7 +35,7 @@ function setHealth(value) {
         console.log(userRef);
 
         // Checks if the health value is over 100
-        if (healthValue >= 98) {
+        if (healthValue > 100) {
             incRate = 100;
         } else {
             if (healthValue < 0) {
