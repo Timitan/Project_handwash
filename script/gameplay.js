@@ -1,9 +1,10 @@
 // Global Variables
 let healthValue = 100;
-let healthDecreaseRate = 0.5;
+let healthDecreaseRate = 5;
 let clickGainHealthRate = 2;
 let globalRate = 1;
 let clickSound = new Audio("../sounds/hand_click.mp3");
+let germArray = [];
 let userScore;
 let userID;
 
@@ -52,6 +53,7 @@ function setHealth(value) {
             })
             .then(function () {
                 // Execute after updating health variable
+
             })
             .catch(function (error) {
                 console.error("Error writing document: ", error);
@@ -94,7 +96,7 @@ function displayScore() {
                     x = d.data()["score"];
                 else
                     x = 0; // user has not played yet
-                
+
                 if (d.get("rate") != null)
                     y = d.data()["rate"];
                 else
@@ -105,40 +107,41 @@ function displayScore() {
                 userScore = x;
                 let scoreDisplay = document.getElementById("money-display");
                 scoreDisplay.innerHTML = "$ " + x;
-
             });
     });
 }
 
+function changeHealthVariable(){
+    clickSound.play();
+    firebase.auth().onAuthStateChanged(function (user) {
+        setHealth(clickGainHealthRate);
+        userID = firebase.auth().currentUser.uid;
+        let userRef = db.collection('users').doc(user.uid);
+        //userID = userRef;
+        /////Plays the sound/////
+        // Increment user's clicks and score
+        //let rate = db.collection("users/").doc(user.uid).data()["rate"];
+        let incRate = firebase.firestore.FieldValue.increment(globalRate);
+        let clickInc = firebase.firestore.FieldValue.increment(1);
+        userRef.update({
+                score: incRate,
+                clicks: clickInc
+            })
+            .then(function () {
+                // Execute after updating health variable
+            })
+            .catch(function (error) {
+                console.error("Error writing document: ", error);
+            });
+    });
+}
 
 function setHandEventListener() {
     // Adds an event listener to the hand when it is clicked
-    document.getElementById("hand").addEventListener("mousedown", function (e) {
-        firebase.auth().onAuthStateChanged(function (user) {
-            setHealth(clickGainHealthRate);
-            userID = firebase.auth().currentUser.uid;
-            let userRef = db.collection('users').doc(user.uid);
-            //userID = userRef;
-            /////Plays the sound/////
-            clickSound.play();
-            // Increment user's clicks and score
-            //let rate = db.collection("users/").doc(user.uid).data()["rate"];
-            let incRate = firebase.firestore.FieldValue.increment(globalRate);
-            let clickInc = firebase.firestore.FieldValue.increment(1);
-            userRef.update({
-                    score: incRate,
-                    clicks: clickInc
-                })
-                .then(function () {
-                    // Execute after updating health variable
-                    //displayScore(rate);
-                })
-                .catch(function (error) {
-                    console.error("Error writing document: ", error);
-                });
-        });
+    document.getElementById("hand").addEventListener("mousedown", function () {
+        removeGerm();
+        changeHealthVariable();
     });
-    
 }
 
 // ####################################################################
@@ -146,33 +149,123 @@ function setHandEventListener() {
 // ####################################################################
 
 // Creates a germ object
-function Germ(xPos, yPos){
+function Germ(xPos, yPos, index) {
     this.germObj = document.createElement("img");
-    this.germObj.src = "images/germ.png";
-    document.getElementById("germContainer").appendChild(this.germObj);
+    this.div = document.createElement("div");
     this.xPos = xPos;
     this.yPos = yPos;
 
-    this.germObj.style.position = "absolute";
+    // Creates an id from 0 - 100
+    this.germObj.id = "germImg" + index;
+    this.germObj.src = "images/germ.png";
+
+    // Creates a div to put the germs in
+    this.div.id =  index + "div";
+    this.div.style.position = "absolute";
+    this.div.style.width = "100%";
+    this.div.style.height = "100%";
+
+    document.getElementById("germContainer").appendChild(this.div);
+    document.getElementById(this.div.id).appendChild(this.germObj);
+
+    this.germObj.style.position = "relative";
     this.germObj.style.width = "50px";
+    this.germObj.style.zIndex = 1;
+    this.germObj.style.transition = "3s";
 
-    this.moveGerm = function(germObj, x, y){
-        germObj.style.top = x + "px";
-        germObj.style.left = y + "px";
+    this.germObj.onclick = function(){
+        let parentNode = this.parentNode.id;
+        document.getElementById(this.id).remove();
+        document.getElementById(parentNode).remove();
+        changeHealthVariable();
     }
-    this.moveGerm(this.germObj, xPos, yPos);
+
+    // Creates a move function for the germs
+    this.moveGerm = function (germObj) {
+        let containerWidth = document.getElementById("germContainer").offsetWidth;
+        let containerHeight = document.getElementById("germContainer").offsetHeight;
+
+        // Sets x positioning based on relative positioning
+        let x = Math.random() * containerWidth - containerWidth / 2;
+
+        // Offset container height so germs don't overlap with healthbar
+        let y = Math.random() * containerHeight - 50;
+
+        germObj.style.top = y + "px";
+        germObj.style.left = x + "px";
+
+        setInterval(function () {
+            let x = Math.random() * containerWidth - containerWidth / 2;
+            let y = Math.random() * containerHeight - 50;
+
+            germObj.style.top = y + "px";
+            germObj.style.left = x + "px";
+        }, 3000);
+    }
+
+    this.moveGerm(this.germObj, this.div.id);
 }
 
 
-function createGerms(){
-    for (let i = 0; i < 5; i++){
-        let x = Math.random(100);
-        let y = Math.random(100);
+function createGerms(num) {
+    let elementArray = Array.from(document.getElementById("germContainer").children);
 
-        let germ = new Germ(x, y);
+    // Create containers based on the last index, prevents killing multiple germs per click
+    startIndex = 0;
+    if (elementArray.length != 0){
+        let lastElementId = elementArray[elementArray.length-1].id;
+        startIndex = parseInt(lastElementId) + 1;
+        console.log(startIndex);
+    }
 
+    let containerWidth = document.getElementById("germContainer").offsetWidth / 6;
+    let containerHeight = document.getElementById("germContainer").offsetHeight / 2;
+
+    // Create 5 germs per 10 seconds
+    for (let i = startIndex; i < num + startIndex; i++) {
+        // Place within the dimensions of the hand
+        let x = Math.random() * containerWidth;
+        let y = Math.random() * containerHeight;
+
+        let germ = new Germ(x, y, i);
+        germArray.push(germ);
     }
 }
+
+function removeGerm() {
+    let elementArray = Array.from(document.getElementById("germContainer").children);
+    if (elementArray.length != 0){
+        let element = elementArray[elementArray.length - 1]
+        document.getElementById(element.id).remove();
+    }
+}
+
+/* 
+function createInitialGerms(){
+    let germCount = 0;
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            db.collection("users/").doc(user.uid)
+                .get().then(function (doc){
+                    console.log("Document data:", doc.data());
+                    germCount = doc.healthValue;
+                    console.log(healthValue);
+                })
+                .then(function (docRef){
+                    germCount = 100 - germCount;
+                    createGerms(germCount);
+                    console.log("Germs Created:" + germCount);
+                })
+                .catch(function (error) {
+                    console.log("Error getting document:", error);
+                });
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    })
+}
+*/
 
 
 // ####################################################################
@@ -182,15 +275,19 @@ function createGerms(){
 /* All the functions to be executed when the page is run.*/
 function gameStart() {
     /* Decrease health bar at a constant rate*/
-    let timerRate = 1000;
+    let timerRate = 10000;
     setInterval(function () {
         setHealth(-healthDecreaseRate);
+        createGerms(5);
     }, timerRate);
+
+    //Creates initial germs
+    // Doesn't quite work yet, will continue after firebase daily quota resets
+    //createInitialGerms();
 
     displayScore();
     displayHealth();
     setHandEventListener();
-    createGerms();
 }
 
 
@@ -203,14 +300,14 @@ function abilityCosts(ability) {
     let ability6;
     let ability7;
     db.collection("users/").doc(userID).get().then(function (d) {
-            ability1 = d.data()["ability1"];
-            ability2 = d.data()["ability2"];
-            ability3 = d.data()["ability3"];
-            ability4 = d.data()["ability4"];
-            ability5 = d.data()["ability5"];
-            ability6 = d.data()["ability6"];
-            ability7 = d.data()["ability7"];
-        })
+        ability1 = d.data()["ability1"];
+        ability2 = d.data()["ability2"];
+        ability3 = d.data()["ability3"];
+        ability4 = d.data()["ability4"];
+        ability5 = d.data()["ability5"];
+        ability6 = d.data()["ability6"];
+        ability7 = d.data()["ability7"];
+    })
     switch (ability) {
         case ("ability1"):
             if (ability1 == 0) {
@@ -276,8 +373,8 @@ function buyAbility(ability) {
      *  if the user says yes then the ability is incremented by one and the score decremented by the 
      *  price of the ability 
      */
-// wont work yet since abilityPrice returns nothing
-// buttons are ugly
+    // wont work yet since abilityPrice returns nothing
+    // buttons are ugly
     switch (ability) {
         case ("ability1"):
             if (userScore < abilityPrice) {
@@ -288,15 +385,15 @@ function buyAbility(ability) {
                 createButton("No", 50);
             }
             break;
-        case ("ability2"): 
-        if (userScore < abilityPrice) {
-            notEnoughScore();
-        } else {
-            confirm.innerHTML = "Would you like to buy this ability?<br>";
-            createButton("Yes", 50, ability, abilityPrice);
-            createButton("No", 50);
-        }
-        break;
+        case ("ability2"):
+            if (userScore < abilityPrice) {
+                notEnoughScore();
+            } else {
+                confirm.innerHTML = "Would you like to buy this ability?<br>";
+                createButton("Yes", 50, ability, abilityPrice);
+                createButton("No", 50);
+            }
+            break;
         case ("soap"):
             if (userScore < abilityPrice) {
                 notEnoughScore();
@@ -370,10 +467,10 @@ function buyAbility(ability) {
                         score: scoreDecrease
                     })
                 })
-            confirm.style.display = "none";
-            }) 
-        } else{
-            button.addEventListener("click", function(){
+                confirm.style.display = "none";
+            })
+        } else {
+            button.addEventListener("click", function () {
                 confirm.style.display = "none";
             })
         }
@@ -383,5 +480,5 @@ function buyAbility(ability) {
     }
 }
 
-    
-    gameStart();
+
+gameStart();
