@@ -113,7 +113,7 @@ function displayScore() {
 
 function setHandEventListener() {
     // Adds an event listener to the hand when it is clicked
-    document.getElementById("handDiv").addEventListener("mousedown", function (e) {
+    document.getElementById("hand").addEventListener("mousedown", function (e) {
         firebase.auth().onAuthStateChanged(function (user) {
             setHealth(clickGainHealthRate);
             userID = firebase.auth().currentUser.uid;
@@ -141,6 +141,38 @@ function setHandEventListener() {
     
 }
 
+// ####################################################################
+// Functions related to germ visuals and its functionality
+// ####################################################################
+
+// Creates a germ object
+function Germ(xPos, yPos){
+    this.germObj = document.createElement("img");
+    this.germObj.src = "images/germ.png";
+    document.getElementById("germContainer").appendChild(this.germObj);
+    this.xPos = xPos;
+    this.yPos = yPos;
+
+    this.germObj.style.position = "absolute";
+    this.germObj.style.width = "50px";
+
+    this.moveGerm = function(germObj, x, y){
+        germObj.style.top = x + "px";
+        germObj.style.left = y + "px";
+    }
+    this.moveGerm(this.germObj, xPos, yPos);
+}
+
+
+function createGerms(){
+    for (let i = 0; i < 5; i++){
+        let x = Math.random(100);
+        let y = Math.random(100);
+
+        let germ = new Germ(x, y);
+
+    }
+}
 
 
 // ####################################################################
@@ -150,7 +182,7 @@ function setHandEventListener() {
 /* All the functions to be executed when the page is run.*/
 function gameStart() {
     /* Decrease health bar at a constant rate*/
-    let timerRate = 20000;
+    let timerRate = 1000;
     setInterval(function () {
         setHealth(-healthDecreaseRate);
     }, timerRate);
@@ -158,7 +190,10 @@ function gameStart() {
     displayScore();
     displayHealth();
     setHandEventListener();
+    createGerms();
 }
+
+
 function abilityCosts(ability) {
     let ability1;
     let ability2;
