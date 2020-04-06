@@ -12,11 +12,14 @@ function loginMessage() {
 
                         let timeElapsed = dateNow.getTime() - prevDate.getTime();
 
-                        // Every 50 seconds, your hand gets dirtier by 0.5%
-                        healthDecreased = Math.floor(timeElapsed / 50000 * 0.5)
+                        // Every 120 seconds, your hand gets dirtier by 0.5%
+                        healthDecreased = Math.floor(timeElapsed / 120000 * 0.5)
 
                         console.log(timeElapsed / 50000) * 0.5;
                         setHealth(-healthDecreased);
+
+                        // Creates germs on load based on health
+                        createInitialGerms();
 
                         // Displays welcome back message
                         document.getElementById("displayName").innerHTML = "Welcome back " + user.displayName + "!<br><br>"

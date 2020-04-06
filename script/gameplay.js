@@ -1,7 +1,7 @@
 // Global Variables
 let healthValue = 100;
 let healthDecreaseRate = 5;
-let clickGainHealthRate = 2;
+let clickGainHealthRate = 1;
 let globalRate = 1;
 let clickSound = new Audio("../sounds/hand_click.mp3");
 let germArray = [];
@@ -21,9 +21,11 @@ function toggleShop() {
     if (height == closedValue || height == "") {
         shopMenu.style.width = openValue;
         shopBtn.style.right = openValue;
+        shopBtn.style.opacity = "0.8";
     } else {
         shopMenu.style.width = closedValue;
         shopBtn.style.right = closedValue;
+        shopBtn.style.opacity = "1";
     }
 }
 // ####################################################################
@@ -169,7 +171,7 @@ function Germ(xPos, yPos, index) {
     document.getElementById(this.div.id).appendChild(this.germObj);
 
     this.germObj.style.position = "relative";
-    this.germObj.style.width = "50px";
+    this.germObj.style.width = "90px";
     this.germObj.style.zIndex = 1;
     this.germObj.style.transition = "3s";
 
@@ -195,6 +197,9 @@ function Germ(xPos, yPos, index) {
         germObj.style.left = x + "px";
 
         setInterval(function () {
+            let containerWidth = document.getElementById("germContainer").offsetWidth;
+            let containerHeight = document.getElementById("germContainer").offsetHeight;
+
             let x = Math.random() * containerWidth - containerWidth / 2;
             let y = Math.random() * containerHeight - 50;
 
@@ -232,6 +237,7 @@ function createGerms(num) {
     }
 }
 
+// Remove the last germ element in the array from the document
 function removeGerm() {
     let elementArray = Array.from(document.getElementById("germContainer").children);
     if (elementArray.length != 0){
@@ -240,7 +246,7 @@ function removeGerm() {
     }
 }
 
-/* 
+// Creates the germs initially there on startup
 function createInitialGerms(){
     let germCount = 0;
     firebase.auth().onAuthStateChanged(user => {
@@ -248,13 +254,11 @@ function createInitialGerms(){
             db.collection("users/").doc(user.uid)
                 .get().then(function (doc){
                     console.log("Document data:", doc.data());
-                    germCount = doc.healthValue;
-                    console.log(healthValue);
-                })
-                .then(function (docRef){
+                    germCount = doc.data().health;
+                    console.log("Health:" + germCount);
                     germCount = 100 - germCount;
                     createGerms(germCount);
-                    console.log("Germs Created:" + germCount);
+                    console.log("GermCount:" + germCount);
                 })
                 .catch(function (error) {
                     console.log("Error getting document:", error);
@@ -265,7 +269,7 @@ function createInitialGerms(){
         }
     })
 }
-*/
+
 
 
 // ####################################################################
@@ -278,12 +282,11 @@ function gameStart() {
     let timerRate = 10000;
     setInterval(function () {
         setHealth(-healthDecreaseRate);
-        createGerms(5);
-    }, timerRate);
 
-    //Creates initial germs
-    // Doesn't quite work yet, will continue after firebase daily quota resets
-    //createInitialGerms();
+        if (healthValue > 0){
+            createGerms(5);
+        }
+    }, timerRate);
 
     displayScore();
     displayHealth();
