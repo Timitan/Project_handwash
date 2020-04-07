@@ -49,6 +49,7 @@ Organization and structure of files:
 ├── main.html                # After logged in, play the game on this page
 ├── stats.html               # After logged in, see statistics here
 ├── leaderboard.html         # After logged in, see the leaderboard here
+└── gameinfo.html            # See game rules here         
 └── README.md
 
 Contains the following subfolders:
