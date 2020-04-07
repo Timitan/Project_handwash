@@ -1,6 +1,6 @@
 // Global Variables
 let healthValue = 100;
-let healthDecreaseRate = 5;
+let healthDecreaseRate = 1;
 let clickGainHealthRate = 1;
 let globalRate = 1;
 let clickSound = new Audio("../sounds/hand_click.mp3");
@@ -279,12 +279,12 @@ function createInitialGerms() {
 /* All the functions to be executed when the page is run.*/
 function gameStart() {
     /* Decrease health bar at a constant rate*/
-    let timerRate = 10000;
+    let timerRate = 15000;
     setInterval(function () {
         setHealth(-healthDecreaseRate);
 
         if (healthValue > 0) {
-            createGerms(5);
+            createGerms(1);
         }
     }, timerRate);
 

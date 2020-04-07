@@ -16,10 +16,6 @@
 <body id="body">
     <!-- Header -->
     <nav class=" navbar navbar-expand-lg navbar-light">
-        <button class="navbar-toggler" type="button">
-            <span class="border border-primary text-white">(Help)</span>
-        </button>
-
         <a class="navbar-brand text-white" href="index.html">Bacteria Cafeteria</a>
         <button class="navbar-toggler bg-light" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -42,7 +38,7 @@
         </div>
     </nav>
 
-    <!-- ////////////Leaderboard/////////////// -->
+    <!-- LEADERBOARD -->
 
     <table class="table" id="leaderboard">
         <thead class="thead-light">
@@ -65,25 +61,8 @@
             </tr>
         </tbody>
     </table>
-    <!-- 
-    <table id="leaderboard">
-            <tr>
-                <th>Name</th>
-                <th>Clicks</th>
-            </tr>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-            </tr>
-        </tbody> 
-    </table> -->
 
+    <!-- FOOTER -->
     <footer class="footer">
 
     </footer>
@@ -102,13 +81,19 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
 
+    <!-------------->
+    <!-- FireBase -->
+    <!-------------->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
     <script src="script/firebase_api.js"> </script>
-    <!-- Our JavaScript-->
-    <script src="script/stats.js"></script>
+
+    <!-------------------->
+    <!-- Our JavaScript -->
+    <!-------------------->
     <script src="script/leaderboard.js"></script>
 
 

@@ -12,11 +12,11 @@ function getClicks() {
                     if (doc.exists) {
                         console.log(doc.data());
                         //Gets user anem, number of clicks and health.
-                        document.getElementById("clickCount").innerHTML = "Number of clicks: " + doc.data().clicks;
+                        document.getElementById("clickCount").innerHTML = "Number of germs Killed: " + (doc.data().clicks * 840000);
                         document.getElementById("userName").innerHTML = "User Name: " + doc.data().name;
                         document.getElementById("health").innerHTML = "Health: " + doc.data().health;
                         
-                        document.getElementById("score").innerHTML = "Germs Killed: " + (doc.data().score);
+                        document.getElementById("score").innerHTML = "Score: " + (doc.data().score);
                     } else {
                         // doc.data() will be undefined in this case
                         console.log("No such document!");
