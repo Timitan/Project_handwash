@@ -10,12 +10,15 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
   <!-- Our stylesheet-->
-  <link rel="stylesheet" href="style/landing-page.css">
+  <link rel="stylesheet" href="style/main-page.css">
 </head>
 
-<body>
+<body id="body">
+  <div id="abilityConfirm">
+
+  </div>
   <!-- Header -->
-  <nav class=" navbar navbar-expand-lg navbar-light bg-dark">
+  <nav class=" navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand text-white" href="#">Bacteria Cafeteria</a>
     <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,24 +31,102 @@
           <a class="nav-link text-white" href="login.html">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Leaderboard</a>
+          <a class="nav-link text-white" href="stats.html" target="_blank">Statistics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="leaderboard.html" target="_blank">Leaderboard</a>
         </li>
       </ul>
     </div>
+   
   </nav>
 
-  <h1>Bacteria Cafeteria!</h1>
-  <div>
-    <img src="images/hand.png">
+  <!-- Shop -->
+  <div class="info-head">
+    <div>
+      <h1 id="money-display">$ 0 </h1>
+    </div>
+
+    <div>
+      <button type="button" onclick="toggleShop()" id="shop-button">
+        <img id="shop-img" src="images/shop_icon.png" alt="shop-img">
+      </button>
+    </div>
   </div>
 
-  <div>
-    <a href="login.html">
-      <button type="button" id="login-button">
-        <h2>Login!</h2>
-      </button>
-    </a>
+  <div id="displayMessage">
+    <button id="closeButton" onclick="closeMessage()">X</button>
+    <h2 id="displayName"></h2>
   </div>
+
+
+
+  <!-- Shop Menu-->
+  <div id="mySideNav">
+    <a class="closeButton" onclick="toggleShop()">&times;</a>
+    <h1>Shop</h1>
+    <div onclick="buyAbility('ability1')">
+      <img src="images/handSanitizer.jpg">
+      <h2>Hand Sanitizer</h2>      
+      <p class="abilityDesc">Cleans the hand a bit<br>$<span id="firstAbilityCost">15</span></p>
+    </div>
+    <hr>
+    <div onclick="buyAbility('ability2')">
+      <img src="images/faucet.png">
+      <h2>Water</h2>   
+      <p class="abilityDesc">Cleans the hand a lot<br>$<span id="secondAbilityCost">100</span></p>
+    </div>
+    <hr>
+    <div onclick="buyAbility('ability3')">
+      <img src="images/soap.jpg">
+      <h2>Soap Bar</h2>      
+      <p class="abilityDesc">Scrub the germs away<br>$<span id="thirdAbilityCost">1100</span></p>
+    </div>
+    <hr>
+    <div onclick="buyAbility('ability4')">
+      <img src="images/liquidSoap.png">
+      <h2>Liquid Soap</h2>     
+      <p class="abilityDesc">Leaves your hands smelling minty<br>$<span id="fourthAbilityCost">12000</span></p>
+    </div>
+    <hr>
+    <div onclick="buyAbility('ability5')">
+      <img src="images/rubbingAlcohol.png">
+      <h2>Rubbing Alcohol</h2>     
+      <p class="abilityDesc">Literally kills all of the germs<br>$<span id="fifthAbilityCost">130000</span></p>
+    </div>
+    <hr>
+    <div onclick="buyAbility('ability6')">
+      <img src="images/antiseptic.png">
+      <h2>Antiseptic</h2>     
+      <p class="abilityDesc">What's used in the surgery room<br>$<span id="sixthAbilityCost">1400000</span></p>
+    </div>
+    <hr>
+    <div onclick="buyAbility('ability7')">
+      <img src="">
+      <h2>Radiation in a bottle</h2>
+      <p class="abilityDesc">Overkill...<br>$<span id="seventhAbilityCost">20000000</span></p>
+    </div>
+    <hr>
+  </div>
+
+  <!-- Hand -->
+  <div id="handDiv">
+    <div class="handClick" id="germContainer">
+    </div>
+    <input class="handClick" id="hand" type="image" src="images/hand2.png">
+  </div>
+
+  <!-- Cleanliness Health Bar-->
+  <div id="clean-bar-container">
+    <div id="clean-bar"></div>
+  </div>
+
+  <footer class="footer">
+
+  </footer>
+
+  <!-- Login Box-->
+  <div id='firebaseui-auth-container'></div>
 
   <!--Bootstrap JavaScript-->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -64,7 +145,8 @@
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
   <script src="script/firebase_api.js"> </script>
   <!-- Our JavaScript-->
-
+  <script src="script/gameplay.js"></script>
+  <script src="script/userCustomize.js"></script>
 
 </body>
 
