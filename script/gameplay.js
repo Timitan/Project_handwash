@@ -1,6 +1,6 @@
 // Global Variables
 let healthValue = 100;
-let healthDecreaseRate = 5;
+let healthDecreaseRate = 1;
 let clickGainHealthRate = 1;
 let globalRate = 1;
 let clickSound = new Audio("../sounds/hand_click.mp3");
