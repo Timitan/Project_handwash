@@ -12,8 +12,8 @@ function loginMessage() {
 
                         let timeElapsed = dateNow.getTime() - prevDate.getTime();
 
-                        // Every 120 seconds, your hand gets dirtier by 0.5%
-                        healthDecreased = Math.floor(timeElapsed / 120000 * 0.5)
+                        // Every 30 minutes, your hand gets dirtier by 1%
+                        healthDecreased = Math.floor(timeElapsed / 1000 * 60 * 30 * 1)
 
                         console.log(timeElapsed / 50000) * 0.5;
                         setHealth(-healthDecreased);
