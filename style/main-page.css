@@ -226,3 +226,7 @@
 #confirmButton:active{
     transform: translateY(2px);
 }
+
+hr{
+    background-color: white;
+}

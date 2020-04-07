@@ -113,7 +113,7 @@ function displayScore() {
     });
 }
 
-function changeHealthVariable(){
+function changeHealthVariable() {
     clickSound.play();
     firebase.auth().onAuthStateChanged(function (user) {
         setHealth(clickGainHealthRate);
@@ -159,10 +159,10 @@ function Germ(xPos, yPos, index) {
 
     // Creates an id from 0 - 100
     this.germObj.id = "germImg" + index;
-    this.germObj.src = "images/germ.png";
+    this.germObj.src = "images/germ7.gif";
 
     // Creates a div to put the germs in
-    this.div.id =  index + "div";
+    this.div.id = index + "div";
     this.div.style.position = "absolute";
     this.div.style.width = "100%";
     this.div.style.height = "100%";
@@ -175,7 +175,7 @@ function Germ(xPos, yPos, index) {
     this.germObj.style.zIndex = 1;
     this.germObj.style.transition = "3s";
 
-    this.germObj.onclick = function(){
+    this.germObj.onclick = function () {
         let parentNode = this.parentNode.id;
         document.getElementById(this.id).remove();
         document.getElementById(parentNode).remove();
@@ -217,8 +217,8 @@ function createGerms(num) {
 
     // Create containers based on the last index, prevents killing multiple germs per click
     startIndex = 0;
-    if (elementArray.length != 0){
-        let lastElementId = elementArray[elementArray.length-1].id;
+    if (elementArray.length != 0) {
+        let lastElementId = elementArray[elementArray.length - 1].id;
         startIndex = parseInt(lastElementId) + 1;
         console.log(startIndex);
     }
@@ -240,19 +240,19 @@ function createGerms(num) {
 // Remove the last germ element in the array from the document
 function removeGerm() {
     let elementArray = Array.from(document.getElementById("germContainer").children);
-    if (elementArray.length != 0){
+    if (elementArray.length != 0) {
         let element = elementArray[elementArray.length - 1]
         document.getElementById(element.id).remove();
     }
 }
 
 // Creates the germs initially there on startup
-function createInitialGerms(){
+function createInitialGerms() {
     let germCount = 0;
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             db.collection("users/").doc(user.uid)
-                .get().then(function (doc){
+                .get().then(function (doc) {
                     console.log("Document data:", doc.data());
                     germCount = doc.data().health;
                     console.log("Health:" + germCount);
@@ -283,7 +283,7 @@ function gameStart() {
     setInterval(function () {
         setHealth(-healthDecreaseRate);
 
-        if (healthValue > 0){
+        if (healthValue > 0) {
             createGerms(5);
         }
     }, timerRate);
@@ -294,6 +294,9 @@ function gameStart() {
 }
 
 
+// ####################################################################
+// Functions to show costs of different abilities
+// ####################################################################
 function abilityCosts(ability) {
     let ability1;
     let ability2;
@@ -359,6 +362,10 @@ function abilityCosts(ability) {
     }
 }
 
+
+// ####################################################################
+// Function  to buy abilities
+// ####################################################################
 function buyAbility(ability) {
     // this method isnt working yet
     // purchasing abilities only works once of the fields change cause i dont know how to set it up so it sets the userID on load
@@ -482,6 +489,4 @@ function buyAbility(ability) {
         confirm.appendChild(button);
     }
 }
-
-
 gameStart();

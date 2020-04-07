@@ -2,12 +2,11 @@
 
 
 // ####################################################################
-// Functions to get User Stats
+// Functions to show User Stats
 // ####################################################################
 function getClicks() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-            
             db.collection("users/").doc(user.uid)
                 .get().then(function (doc) {
                     if (doc.exists) {
@@ -16,6 +15,8 @@ function getClicks() {
                         document.getElementById("clickCount").innerHTML = "Number of clicks: " + doc.data().clicks;
                         document.getElementById("userName").innerHTML = "User Name: " + doc.data().name;
                         document.getElementById("health").innerHTML = "Health: " + doc.data().health;
+                        
+                        document.getElementById("score").innerHTML = "Germs Killed: " + (doc.data().score);
                     } else {
                         // doc.data() will be undefined in this case
                         console.log("No such document!");

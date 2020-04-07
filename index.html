@@ -19,10 +19,6 @@
   </div>
   <!-- Header -->
   <nav class=" navbar navbar-expand-lg navbar-light">
-    <button class="navbar-toggler" type="button">
-      <span class="border border-primary text-white">(Help)</span>
-    </button>
-
     <a class="navbar-brand text-white" href="#">Bacteria Cafeteria</a>
     <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,9 +27,6 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link text-white" href="#">Options<span class="sr-only">(current)</span></a>
-        </li>
         <li class="nav-item">
           <a class="nav-link text-white" href="login.html">Login</a>
         </li>
@@ -45,6 +38,7 @@
         </li>
       </ul>
     </div>
+   
   </nav>
 
   <!-- Shop -->
@@ -73,39 +67,46 @@
     <h1>Shop</h1>
     <div onclick="buyAbility('ability1')">
       <img src="images/handSanitizer.jpg">
-      <h2>Hand Sanitizer</h2>
+      <h2>Hand Sanitizer</h2>      
       <p class="abilityDesc">Cleans the hand a bit<br>$<span id="firstAbilityCost">15</span></p>
     </div>
+    <hr>
     <div onclick="buyAbility('ability2')">
       <img src="images/faucet.png">
-      <h2>Water</h2>
+      <h2>Water</h2>   
       <p class="abilityDesc">Cleans the hand a lot<br>$<span id="secondAbilityCost">100</span></p>
     </div>
+    <hr>
     <div onclick="buyAbility('ability3')">
       <img src="images/soap.jpg">
-      <h2>Soap Bar</h2>
+      <h2>Soap Bar</h2>      
       <p class="abilityDesc">Scrub the germs away<br>$<span id="thirdAbilityCost">1100</span></p>
     </div>
+    <hr>
     <div onclick="buyAbility('ability4')">
       <img src="images/liquidSoap.png">
-      <h2>Liquid Soap</h2>
+      <h2>Liquid Soap</h2>     
       <p class="abilityDesc">Leaves your hands smelling minty<br>$<span id="fourthAbilityCost">12000</span></p>
     </div>
+    <hr>
     <div onclick="buyAbility('ability5')">
       <img src="images/rubbingAlcohol.png">
-      <h2>Rubbing Alcohol</h2>
+      <h2>Rubbing Alcohol</h2>     
       <p class="abilityDesc">Literally kills all of the germs<br>$<span id="fifthAbilityCost">130000</span></p>
     </div>
+    <hr>
     <div onclick="buyAbility('ability6')">
       <img src="images/antiseptic.png">
-      <h2>Antiseptic</h2>
+      <h2>Antiseptic</h2>     
       <p class="abilityDesc">What's used in the surgery room<br>$<span id="sixthAbilityCost">1400000</span></p>
     </div>
+    <hr>
     <div onclick="buyAbility('ability7')">
       <img src="">
       <h2>Radiation in a bottle</h2>
       <p class="abilityDesc">Overkill...<br>$<span id="seventhAbilityCost">20000000</span></p>
     </div>
+    <hr>
   </div>
 
   <!-- Hand -->
