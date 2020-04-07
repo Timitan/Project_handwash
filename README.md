@@ -18,7 +18,7 @@ hand over time and it's the user's job to get rid of them. If there are too many
 get "sick" and they would lose the game. 
 
 Germs would also be created whether or not the user had the game open or not. This would incentivize coming back to the game once in a
-while to clean up their hand. Doing so would hopefully show the user how important it is to wash their hands.
+while to clean up their hand. Doing so would hopefully create a constant reminder for the user to wash their hands.
 
 ## Technologies
 Technologies that were used for this project:
