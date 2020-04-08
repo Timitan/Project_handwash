@@ -419,8 +419,8 @@ function buyAbility(ability) {
                     createButton("Ok");
                 } else if (currentAbilityCost < userScore) {
                     confirm.innerHTML = "Would you like to buy this ability?<br>";
-                    createButton("Yes", 10, ability, currentAbilityCost);
-                    createButton("No", 50);
+                    createButton("Yes", 5, ability, currentAbilityCost);
+                    createButton("No", 25);
                 }
                 break;
             case ("ability2"):
