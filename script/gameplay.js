@@ -10,6 +10,7 @@ let userID;
 let currentAbilityCost;
 let currentRateIncrease;
 let currentAbilityNewCost;
+let currentAbilityOwned;
 
 // A variable to indicate how much the score is increased by
 //let rate = 1;
@@ -128,6 +129,7 @@ function displayScore() {
                 // Displays the amount
                 console.log(y);
                 userScore = x;
+                globalRate = y;
                 let scoreDisplay = document.getElementById("money-display");
                 scoreDisplay.innerHTML = "$ " + x;
             });
@@ -336,6 +338,7 @@ function abilityCosts(ability, cost) {
                         } else {
                             currentAbilityCost = (Math.ceil(15 * Math.pow(1.15, ability1)));
                             currentAbilityNewCost = (Math.ceil(15 * Math.pow(1.15, (ability1 + 1))));
+                            currentAbilityOwned = ability1;
                         }
                         break; 
                         case ("ability2"):
@@ -503,9 +506,11 @@ function createButton(text, marginStart, ability) {
                 switch (ability) {
                     case ("ability1"):
                         document.getElementById("firstAbilityCost").innerHTML = currentAbilityNewCost;
+                        document.getElementById("firstAbilityOwned").innerHTML = "Owned: 1";
                         userRef.update({
                             ability1: plusOne,
-                            score: scoreDecrease
+                            score: scoreDecrease,
+                            rate: plusOne
                         });
                         break;
                     case ("ability2"):
