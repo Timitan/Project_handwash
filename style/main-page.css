@@ -208,6 +208,7 @@
 #abilityConfirm{
     position: fixed;;
     text-align:center;
+    font-size: 30px;
     z-index:3;
     color: white;
     background-color: rgba(20, 40, 78, 0.9);
@@ -218,7 +219,9 @@
 #confirmButton{
    float:none;
     display:inline-block;
-    background-color: rgb(61, 61, 241);
+    color: white;
+    font-size: 30px;
+    background-color: #7597c5;
     border:none;
     width: 20vw;
     height: 10vh;
