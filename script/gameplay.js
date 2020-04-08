@@ -323,68 +323,93 @@ function gameStart() {
 function abilityCosts(ability, cost) {
     firebase.auth().onAuthStateChanged(function (user) {
         db.collection("users/").doc(user.uid).get().then(function (d) {
-                let ability1 = d.data()["ability1"];
-                let ability2 = d.data()["ability2"];
-                let ability3 = d.data()["ability3"];
-                let ability4 = d.data()["ability4"];
-                let ability5 = d.data()["ability5"];
-                let ability6 = d.data()["ability6"];
-                let ability7 = d.data()["ability7"];
-                switch (ability) {
-                    case ("ability1"):
-                        if (ability1 == 0) {
-                            currentAbilityCost = 15;
-                            currentAbilityNewCost = (Math.ceil(15 * Math.pow(1.15, ability1)));
-                            currentAbilityOwned = 1;
-                        } else {
-                            currentAbilityCost = (Math.ceil(15 * Math.pow(1.15, ability1)));
-                            currentAbilityNewCost = (Math.ceil(15 * Math.pow(1.15, (ability1 + 1))));
-                            currentAbilityOwned = ability1 + 1;
-                        }
-                        break; 
-                        case ("ability2"):
-                            if (ability2 == 0) {
-                                currentAbilityCost = 100;
-                            } else {
-                                currentAbilityCost = (Math.ceil(100 * Math.pow(1.15, ability2)));
-                            }
-                            break;
-                            case ("ability3"):
-                                if (ability3 == 0) {
-                                    currentAbilityCost = 1100;
-                                } else {
-                                    currentAbilityCost = (Math.ceil(1100 * Math.pow(1.15, ability3)));
-                                }
-                                break;
-                                case ("ability5"):
-                                    if (ability4 == 0) {
-                                        currentAbilityCost = 12000;
-                                    } else {
-                                        currentAbilityCost = (Math.ceil(12000 * Math.pow(1.15, ability4)));
-                                    }
-                                    break;
-                                    case ("ability5"):
-                                        if (ability5 == 0) {
-                                            currentAbilityCost = 130000;
-                                        } else {
-                                            currentAbilityCost = (Math.ceil(130000 * Math.pow(1.15, ability5)));
-                                        }
-                                        case ("ability6"):
-                                            if (ability6 == 0) {
-                                                currentAbilityCost = 1400000;
-                                            } else {
-                                                currentAbilityCost = (Math.ceil(1400000 * Math.pow(1.15, ability6)));
-                                            }
-                                            break;
-                                            case ("radiation"):
-                                                if (ability7 == 0) {
-                                                    currentAbilityCost = 20000000;
-                                                } else {
-                                                    currentAbilityCost = Math.ceil((20000000 * Math.pow(1.15, ability7)));
-                                                }
-                                                break;
-                }
-            });
+            let ability1 = d.data()["ability1"];
+            let ability2 = d.data()["ability2"];
+            let ability3 = d.data()["ability3"];
+            let ability4 = d.data()["ability4"];
+            let ability5 = d.data()["ability5"];
+            let ability6 = d.data()["ability6"];
+            let ability7 = d.data()["ability7"];
+            switch (ability) {
+                case ("ability1"):
+                    if (ability1 == 0) {
+                        currentAbilityCost = 15;
+                        currentAbilityNewCost = (Math.ceil(15 * Math.pow(1.15, ability1)));
+                        currentAbilityOwned = 1;
+                    } else {
+                        currentAbilityCost = (Math.ceil(15 * Math.pow(1.15, ability1)));
+                        currentAbilityNewCost = (Math.ceil(15 * Math.pow(1.15, (ability1 + 1))));
+                        currentAbilityOwned = ability1 + 1;
+                    }
+                    break;
+                case ("ability2"):
+                    if (ability2 == 0) {
+                        currentAbilityCost = 100;
+                        currentAbilityNewCost = (Math.cel(100 * Math.pow(1.15, ability2)));
+                        currentAbilityOwned = 1;
+                    } else {
+                        currentAbilityCost = (Math.ceil(100 * Math.pow(1.15, ability2)));
+                        currentAbilityNewCost = (Math.ceil(100 * Math.pow(1.15, (ability2 + 1))));
+                        currentAbilityOwned = ability2 + 1;
+                    }
+                    break;
+                case ("ability3"):
+                    if (ability3 == 0) {
+                        currentAbilityCost = 1100;
+                        currentAbilityNewCost = (Math.ceil(1100 * Math.pow(1.15, ability3)));
+                        currentAbilityOwned = 1;
+                    } else {
+                        currentAbilityCost = (Math.ceil(1100 * Math.pow(1.15, ability3)));
+                        currentAbilityNewCost = (Math.ceil(1100 * Math.pow(1.15, (ability3 + 1))));
+                        currentAbilityOwned = ability3 + 1;
+                    }
+                    break;
+                case ("ability5"):
+                    if (ability4 == 0) {
+                        currentAbilityCost = 12000;
+                        currentAbilityNewCost = (Math.ceil(12000 * Math.pow(1.15, ability4)));
+                        currentAbilityOwned = 1;
+                    } else {
+                        currentAbilityCost = (Math.ceil(12000 * Math.pow(1.15, ability4)));
+                        currentAbilityNewCost = (Math.ceil(12000 * Math.pow(1.15, (ability5 + 1))));
+                        currentAbilityOwned = ability4 + 1;
+                    }
+                    break;
+                case ("ability5"):
+                    if (ability5 == 0) {
+                        currentAbilityCost = 130000;
+                        currentAbilityNewCost = (Math.ceil(130000 * Math.pow(1.15, ability5)))
+                        currentAbilityOwned = 1;
+                    } else {
+                        currentAbilityCost = (Math.ceil(130000 * Math.pow(1.15, ability5)));
+                        currentAbilityNewCost = (Math.ceil(130000 * Math.pow(1.15, (ability5 + 1))));
+                        currentAbilityOwned = ability5 + 1;
+                    }
+                    break;
+                case ("ability6"):
+                    if (ability6 == 0) {
+                        currentAbilityCost = 1400000;
+                        currentAbilityNewCost = (Math.ceil(1400000 * Math.pow(1.15, ability6)));
+                        currentAbilityOwned = 1;
+                    } else {
+                        currentAbilityCost = (Math.ceil(1400000 * Math.pow(1.15, ability6)));
+                        currentAbilityNewCost = (Math.ceil(1400000 * Math.pow(1.15, (ability6 + 1))));
+                        currentAbilityOwned = ability6 + 1;
+                    }
+                    break;
+                case ("ability7"):
+                    if (ability7 == 0) {
+                        currentAbilityCost = 20000000;
+                        currentAbilityNewCost = (Math.ceil((20000000 * Math.pow(1.15, ability7))));
+                        currentAbilityOwned = 1;
+                    } else {
+                        currentAbilityCost = (Math.ceil((20000000 * Math.pow(1.15, ability7))));
+                        currentAbilityNewCost = (Math.ceil(20000000 * Math.pow(1.15, (abilty7 + 1))));
+                        currentAbilityOwned = ability7 + 1;
+                    }
+                    break;
+            }
+        });
     });
 }
 
@@ -503,6 +528,7 @@ function createButton(text, marginStart, ability) {
             firebase.auth().onAuthStateChanged(function (user) {
                 let plusOne = firebase.firestore.FieldValue.increment(1);
                 let scoreDecrease = firebase.firestore.FieldValue.increment(currentAbilityCost * -1);
+                let fieldVal = firebase.firestore.FieldValue;
                 let userRef = db.collection('users').doc(user.uid);
                 switch (ability) {
                     case ("ability1"):
@@ -511,43 +537,53 @@ function createButton(text, marginStart, ability) {
                         userRef.update({
                             ability1: plusOne,
                             score: scoreDecrease,
-                            rate: plusOne
+                            rate: fieldVal.increment(0.1)
                         });
                         break;
                     case ("ability2"):
+                        document.getElementById("secondAbilityCost").innerHTML = currentAbilityNewCost;
+                        document.getElementById("secondAbilityOwned").innerHTML = "Owned: " + currentAbilityOwned;
                         userRef.update({
                             ability2: plusOne,
-                            score: scoreDecrease
+                            score: scoreDecrease,
+                            rate: fieldVal.increment(1)
                         });
                         break;
                     case ("ability3"):
+                        document.getElementById("thirdAbilityCost").innerHTML = currentAbilityNewCost;
+                        document.getElementById("thirdAbilityOwned").innerHTML = "Owned: " + currentAbilityOwned;
                         userRef.update({
                             ability3: plusOne,
-                            score: scoreDecrease
+                            score: scoreDecrease,
+                            rate: fieldVal.increment(8)
                         });
                         break;
                     case ("ability4"):
                         userRef.update({
                             ability4: plusOne,
-                            score: scoreDecrease
+                            score: scoreDecrease,
+                            rate: fieldVal.increment(47)
                         });
                         break;
                     case ("ability5"):
                         userRef.update({
                             ability5: plusOne,
-                            score: scoreDecrease
+                            score: scoreDecrease,
+                            rate: fieldVal.increment(1400)
                         });
                         break;
                     case ("ability6"):
                         userRef.update({
                             ability6: plusOne,
-                            score: scoreDecrease
+                            score: scoreDecrease,
+                            rate: fieldVal.increment(7800)
                         });
                         break;
                     case ("ability7"):
                         userRef.update({
                             ability7: plusOne,
-                            score: scoreDecrease
+                            score: scoreDecrease,
+                            rate: fieldVal.increment(44000)
                         });
                         break;
                 }
