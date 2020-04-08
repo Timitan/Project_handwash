@@ -9,6 +9,7 @@ let userScore;
 let userID;
 let currentAbilityCost;
 let currentRateIncrease;
+let currentAbilityNewCost;
 
 // A variable to indicate how much the score is increased by
 //let rate = 1;
@@ -43,8 +44,21 @@ function setHealth(value) {
         if (healthValue > 100) {
             incRate = 100;
         } else {
-            if (healthValue < 0) {
-                incRate = 0;
+            if (healthValue <= 0) {
+                loseTheGame();
+                userRef.update({
+                    clicks: 0,
+                    score: 0,
+                    rate: 1,
+                    health: 100,
+                    ability1: 0,
+                    ability2: 0,
+                    ability3: 0,
+                    ability4: 0,
+                    ability5: 0,
+                    ability6: 0,
+                    ability7: 0,
+                });
             } else {
                 incRate = firebase.firestore.FieldValue.increment(value);
             }
@@ -64,7 +78,12 @@ function setHealth(value) {
             });
     });
 }
-
+function loseTheGame(){
+    let centerPiece = document.getElementById("displayMessage");
+    centerPiece.style.display = "block";
+    //document.getElementById("closeButton").style.display = "inline";
+    centerPiece.innerHTML = "You lost all of your HP.<br>Now you have to restart the game from the beginning.";
+}
 // Grabs the health variable from the database and displays it
 function displayHealth() {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -313,27 +332,33 @@ function abilityCosts(ability, cost) {
                     case ("ability1"):
                         if (ability1 == 0) {
                             currentAbilityCost = 15;
+                            currentAbilityNewCost = (Math.ceil(15 * Math.pow(1.15, ability1)));
                         } else {
                             currentAbilityCost = (Math.ceil(15 * Math.pow(1.15, ability1)));
+                            currentAbilityNewCost = (Math.ceil(15 * Math.pow(1.15, (ability1 + 1))));
                         }
+                        break; 
                         case ("ability2"):
                             if (ability2 == 0) {
                                 currentAbilityCost = 100;
                             } else {
                                 currentAbilityCost = (Math.ceil(100 * Math.pow(1.15, ability2)));
                             }
+                            break;
                             case ("ability3"):
                                 if (ability3 == 0) {
                                     currentAbilityCost = 1100;
                                 } else {
                                     currentAbilityCost = (Math.ceil(1100 * Math.pow(1.15, ability3)));
                                 }
+                                break;
                                 case ("ability5"):
                                     if (ability4 == 0) {
                                         currentAbilityCost = 12000;
                                     } else {
                                         currentAbilityCost = (Math.ceil(12000 * Math.pow(1.15, ability4)));
                                     }
+                                    break;
                                     case ("ability5"):
                                         if (ability5 == 0) {
                                             currentAbilityCost = 130000;
@@ -346,12 +371,14 @@ function abilityCosts(ability, cost) {
                                             } else {
                                                 currentAbilityCost = (Math.ceil(1400000 * Math.pow(1.15, ability6)));
                                             }
+                                            break;
                                             case ("radiation"):
                                                 if (ability7 == 0) {
                                                     currentAbilityCost = 20000000;
                                                 } else {
                                                     currentAbilityCost = Math.ceil((20000000 * Math.pow(1.15, ability7)));
                                                 }
+                                                break;
                 }
             });
     });
@@ -381,78 +408,84 @@ function buyAbility(ability) {
      */
     // wont work yet since abilityPrice returns nothing
     // buttons are ugly
-    switch (ability) {
-        case ("ability1"):
-            if (userScore < currentAbilityCost) {
-                notEnoughScore();
-            } else {
-                confirm.innerHTML = "Would you like to buy this ability?<br>";
-                createButton("Yes", 10, ability, currentAbilityCost);
-                createButton("No", 50);
-            }
-            break;
-        case ("ability2"):
-            if (userScore < currentAbilityCost) {
-                notEnoughScore();
-            } else {
-                confirm.innerHTML = "Would you like to buy this ability?<br>";
-                createButton("Yes", 10, ability, currentAbilityCost);
-                createButton("No", 50);
-            }
-            break;
-        case ("ability3"):
-            if (userScore < currentAbilityCost) {
-                notEnoughScore();
-            } else {
-                confirm.innerHTML = "Would you like to buy this ability?<br>";
-                createButton("Yes", 10, ability, currentAbilityCost);
-                createButton("No", 50);
-            }
-            break;
-        case ("ability4"):
-            if (userScore < currentAbilityCost) {
-                notEnoughScore();
-            } else {
-                confirm.innerHTML = "Would you like to buy this ability?<br>";
-                createButton("Yes", 10, ability, currentAbilityCost);
-                createButton("No", 50);
-            }
-            break;
-        case ("ability5"):
-            if (userScore < currentAbilityCost) {
-                notEnoughScore();
-            } else {
-                confirm.innerHTML = "Would you like to buy this ability?<br>";
-                createButton("Yes", 10, ability, currentAbilityCost);
-                createButton("No", 50);
-            }
-            break;
-        case ("ability6"):
-            if (userScore < currentAbilityCost) {
-                notEnoughScore();
-            } else {
-                confirm.innerHTML = "Would you like to buy this ability?<br>";
-                createButton("Yes", 50, ability, currentAbilityCost);
-                createButton("No", 50);
-            }
-            break;
-        case ("ability7"):
-            if (userScore < currentAbilityCost) {
-                notEnoughScore();
-            } else {
-                confirm.innerHTML = "Would you like to buy this ability?<br>";
-                createButton("Yes", 50, ability, currentAbilityCost);
-                createButton("No", 50);
-            }
-            break;
-    }
+    setTimeout(function(){
+        switch (ability) {
+            case ("ability1"):
+                if (userScore < currentAbilityCost) {
+                    confirm.innerHTML = "You do not have enough score to buy this ability<br>";
+                    createButton("Ok");
+                } else if (currentAbilityCost < userScore) {
+                    confirm.innerHTML = "Would you like to buy this ability?<br>";
+                    createButton("Yes", 10, ability, currentAbilityCost);
+                    createButton("No", 50);
+                }
+                break;
+            case ("ability2"):
+                if (userScore < currentAbilityCost) {
+                    confirm.innerHTML = "You do not have enough score to buy this ability<br>";
+                    createButton("Ok");
+                } else {
+                    confirm.innerHTML = "Would you like to buy this ability?<br>";
+                    createButton("Yes", 10, ability, currentAbilityCost);
+                    createButton("No", 50);
+                }
+                break;
+            case ("ability3"):
+                if (userScore < currentAbilityCost) {
+                    confirm.innerHTML = "You do not have enough score to buy this ability<br>";
+                    createButton("Ok");
+                } else {
+                    confirm.innerHTML = "Would you like to buy this ability?<br>";
+                    createButton("Yes", 10, ability, currentAbilityCost);
+                    createButton("No", 50);
+                }
+                break;
+            case ("ability4"):
+                if (userScore < currentAbilityCost) {
+                    confirm.innerHTML = "You do not have enough score to buy this ability<br>";
+                    createButton("Ok");
+                } else {
+                    confirm.innerHTML = "Would you like to buy this ability?<br>";
+                    createButton("Yes", 10, ability, currentAbilityCost);
+                    createButton("No", 50);
+                }
+                break;
+            case ("ability5"):
+                if (userScore < currentAbilityCost) {
+                    confirm.innerHTML = "You do not have enough score to buy this ability<br>";
+                    createButton("Ok");
+                } else {
+                    confirm.innerHTML = "Would you like to buy this ability?<br>";
+                    createButton("Yes", 10, ability, currentAbilityCost);
+                    createButton("No", 50);
+                }
+                break;
+            case ("ability6"):
+                if (userScore < currentAbilityCost) {
+                    confirm.innerHTML = "You do not have enough score to buy this ability<br>";
+                    createButton("Ok");
+                } else {
+                    confirm.innerHTML = "Would you like to buy this ability?<br>";
+                    createButton("Yes", 50, ability, currentAbilityCost);
+                    createButton("No", 50);
+                }
+                break;
+            case ("ability7"):
+                if (userScore < currentAbilityCost) {
+                    confirm.innerHTML = "You do not have enough score to buy this ability<br>";
+                    createButton("Ok");
+                } else {
+                    confirm.innerHTML = "Would you like to buy this ability?<br>";
+                    createButton("Yes", 50, ability, currentAbilityCost);
+                    createButton("No", 50);
+                }
+                break;
+        }
+    }, 100);
+  
 }
 
     //let increment = firebase.firestore.FieldValue.increment(rate);
-function notEnoughScore() {
-    confirm.innerHTMl = "You do not have enough score for this ability!<br>";
-    createButton("Ok", 50);
-}
 function createButton(text, marginStart, ability) {
     let confirm = document.getElementById("abilityConfirm");
     let button = document.createElement("button");
@@ -469,59 +502,62 @@ function createButton(text, marginStart, ability) {
                 let userRef = db.collection('users').doc(user.uid);
                 switch (ability) {
                     case ("ability1"):
+                        document.getElementById("firstAbilityCost").innerHTML = currentAbilityNewCost;
                         userRef.update({
                             ability1: plusOne,
                             score: scoreDecrease
-                        })
-                        break
-                    case("ability2"):
-                        userRef.update({
-                            ability2: pluesOne,
-                            score: scoreDecrease
-                        })
+                        });
                         break;
-                    case("ability3"):
+                    case ("ability2"):
+                        userRef.update({
+                            ability2: plusOne,
+                            score: scoreDecrease
+                        });
+                        break;
+                    case ("ability3"):
                         userRef.update({
                             ability3: plusOne,
                             score: scoreDecrease
-                        })
+                        });
                         break;
-                    case("ability4"):
+                    case ("ability4"):
                         userRef.update({
                             ability4: plusOne,
                             score: scoreDecrease
-                        })
+                        });
                         break;
-                    case("ability5"):
+                    case ("ability5"):
                         userRef.update({
                             ability5: plusOne,
                             score: scoreDecrease
-                        })
+                        });
                         break;
-                    case("ability6"):
+                    case ("ability6"):
                         userRef.update({
                             ability6: plusOne,
                             score: scoreDecrease
-                        })
+                        });
                         break;
-                    case("ability7"):
+                    case ("ability7"):
                         userRef.update({
                             ability7: plusOne,
                             score: scoreDecrease
-                        })
+                        });
                         break;
                 }
-            })
+            });
             confirm.style.display = "none";
-        })
+            confirm.innerHTML = "";
+
+        });
     } else {
         button.addEventListener("click", function () {
             confirm.style.display = "none";
+            confirm.innerHTML = "";
         })
     }
     button.innerHTML = text;
 
     confirm.appendChild(button);
 }
-    
 gameStart();
