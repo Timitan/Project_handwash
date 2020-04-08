@@ -506,7 +506,7 @@ function createButton(text, marginStart, ability) {
                 switch (ability) {
                     case ("ability1"):
                         document.getElementById("firstAbilityCost").innerHTML = currentAbilityNewCost;
-                        document.getElementById("firstAbilityOwned").innerHTML = "Owned: 1";
+                        document.getElementById("firstAbilityOwned").innerHTML = "Owned: " + currentAbilityOwned;
                         userRef.update({
                             ability1: plusOne,
                             score: scoreDecrease,
