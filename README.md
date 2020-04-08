@@ -69,6 +69,7 @@ Contains the following subfolders:
     /soap.jpeg               # Image for the bar soap upgrade
     /soap.jpg                # Image for the bar soap upgrade
 ├── research                 # Folder for the research in the upgrade descriptions
+    /Handwashing_Facts.docx  # A Document for the research done
 ├── sounds                   # Folder for sounds
     /hand_click.mp3          # Sound that plays when the hand is clicked
 ├── script                   # Folder for scripts
