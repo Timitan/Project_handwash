@@ -335,10 +335,11 @@ function abilityCosts(ability, cost) {
                         if (ability1 == 0) {
                             currentAbilityCost = 15;
                             currentAbilityNewCost = (Math.ceil(15 * Math.pow(1.15, ability1)));
+                            currentAbilityOwned = 1;
                         } else {
                             currentAbilityCost = (Math.ceil(15 * Math.pow(1.15, ability1)));
                             currentAbilityNewCost = (Math.ceil(15 * Math.pow(1.15, (ability1 + 1))));
-                            currentAbilityOwned = ability1;
+                            currentAbilityOwned = ability1 + 1;
                         }
                         break; 
                         case ("ability2"):
@@ -484,7 +485,7 @@ function buyAbility(ability) {
                 }
                 break;
         }
-    }, 100);
+    }, 200);
   
 }
 
