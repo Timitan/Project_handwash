@@ -3,15 +3,17 @@
     background-repeat: no-repeat;
     display: block;
     background-position: center; 
-    background-size: 40em;
+    background-size: 37em;
     
 }
 
-h1 {
+h3 {
     text-align: center;
-    font-size: 50px;
+    font-size:xx-large
 }
-
+#hand{
+    size: 20em;
+}
 h2 {
     text-align: center;
     font-size: 35px;
@@ -21,14 +23,18 @@ div {
     text-align: center;
     width: 100%;
 }
+.boxed {
+    border: 1px solid skyblue;
+    text-align: center;
+  }
 
 #rules{
     font-family: cursive;
 }
-
+/* 
 #rulelist{
     font-family: cursive;
-}
+} */
 
 #login-button {
     position: relative;
