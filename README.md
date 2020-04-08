@@ -50,17 +50,33 @@ Organization and structure of files:
 ├── stats.html               # After logged in, see statistics here
 ├── leaderboard.html         # After logged in, see the leaderboard here
 └── gameinfo.html            # See game rules here         
+└── 404.html                 # Page to redirect to when there is an error     
 └── README.md
 
 Contains the following subfolders:
 ├── images                   # Folder for images
+    /antiseptic.png          # Image for antiseptic upgrade
+    /bg5.png                 # Image for the background
+    /faucet.png              # Image of the faucet for the water upgrade
+    /germ7.gif               # Image of the germs on the main page
+    /hand.png                # Image of the hand on the landing page
+    /hand2.png               # Image of the hand on the main page
+    /handSanitizer.jpg       # Image of the hand sanitizer upgrade
+    /handicon.png            # Image of a hand icon
+    /liquidSoap.png          # Image for the liquid soap upgrade
+    /rubbingAlcohol.png      # Image for the rubbing alcohol upgrade
+    /shop1.png               # Image for the shop button icon
+    /soap.jpeg               # Image for the bar soap upgrade
+    /soap.jpg                # Image for the bar soap upgrade
+├── research                 # Folder for the research in the upgrade descriptions
 ├── sounds                   # Folder for sounds
+    /hand_click.mp3          # Sound that plays when the hand is clicked
 ├── script                   # Folder for scripts
     /firebase_api.js         # Firebase file
     /gameplay.js             # All main gameplay functions involving the main page
     /leaderboard.js          # Users firebase to display a leaderboard
     /stats.js                # Uses firebase to display tracked user statistics
-    /user-customize.js        # Functions involving a more personalized experience for the user
+    /user-customize.js       # Functions involving a more personalized experience for the user
 ├── style                    # Folder for styles
     /landing-page.css        # Styling for the landing page
     /leaderboard.css         # Styling for the leaderboard page
