@@ -30,11 +30,8 @@ div {
 
 #rules{
     font-family: cursive;
+    text-align: center;
 }
-/* 
-#rulelist{
-    font-family: cursive;
-} */
 
 #login-button {
     position: relative;
