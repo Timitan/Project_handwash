@@ -17,8 +17,8 @@ How it works is by visualizing those germs that may come into contact with the u
 hand over time and it's the user's job to get rid of them. If there are too many germs on the hand at one point, the user would supposedly
 get "sick" and they would lose the game. 
 
-Germs would also be created whether or not the user had the game open or not. This would incentivize coming back to the game once in a
-while to clean up their hand. Doing so would hopefully create a constant reminder for the user to wash their hands.
+Germs would also be created even if the user had the game closed. This would incentivize coming back to the game once in a
+while to clean up their hand. Doing so would hopefully create a constant reminder for the user to wash their hands both in the game and in the real world.
 
 ## Technologies
 Technologies that were used for this project:
