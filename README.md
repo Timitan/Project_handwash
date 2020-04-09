@@ -56,18 +56,19 @@ Organization and structure of files:
 Contains the following subfolders:
 ├── images                   # Folder for images
     /antiseptic.png          # Image for antiseptic upgrade
-    /bg5.png                 # Image for the background
+    /bg.png                  # Image for the background
     /faucet.png              # Image of the faucet for the water upgrade
-    /germ7.gif               # Image of the germs on the main page
+    /germ.gif                # Image of the germs on the main page
     /hand.png                # Image of the hand on the landing page
     /hand2.png               # Image of the hand on the main page
     /handSanitizer.jpg       # Image of the hand sanitizer upgrade
     /handicon.png            # Image of a hand icon
     /liquidSoap.png          # Image for the liquid soap upgrade
     /rubbingAlcohol.png      # Image for the rubbing alcohol upgrade
-    /shop1.png               # Image for the shop button icon
+    /shop.png                # Image for the shop button icon
     /soap.jpeg               # Image for the bar soap upgrade
     /soap.jpg                # Image for the bar soap upgrade
+	/radiation.png			 # Image of the radiation bottle upgrade		
 ├── research                 # Folder for the research in the upgrade descriptions
     /Handwashing_Facts.docx  # A Document for the research done
 ├── sounds                   # Folder for sounds
