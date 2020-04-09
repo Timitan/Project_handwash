@@ -17,8 +17,8 @@ How it works is by visualizing those germs that may come into contact with the u
 hand over time and it's the user's job to get rid of them. If there are too many germs on the hand at one point, the user would supposedly
 get "sick" and they would lose the game. 
 
-Germs would also be created whether or not the user had the game open or not. This would incentivize coming back to the game once in a
-while to clean up their hand. Doing so would hopefully create a constant reminder for the user to wash their hands.
+Germs would also be created even if the user had the game closed. This would incentivize coming back to the game once in a
+while to clean up their hand. Doing so would hopefully create a constant reminder for the user to wash their hands both in the game and in the real world.
 
 ## Technologies
 Technologies that were used for this project:
@@ -50,17 +50,34 @@ Organization and structure of files:
 ├── stats.html               # After logged in, see statistics here
 ├── leaderboard.html         # After logged in, see the leaderboard here
 └── gameinfo.html            # See game rules here         
+└── 404.html                 # Page to redirect to when there is an error     
 └── README.md
 
 Contains the following subfolders:
 ├── images                   # Folder for images
+    /antiseptic.png          # Image for antiseptic upgrade
+    /bg5.png                 # Image for the background
+    /faucet.png              # Image of the faucet for the water upgrade
+    /germ7.gif               # Image of the germs on the main page
+    /hand.png                # Image of the hand on the landing page
+    /hand2.png               # Image of the hand on the main page
+    /handSanitizer.jpg       # Image of the hand sanitizer upgrade
+    /handicon.png            # Image of a hand icon
+    /liquidSoap.png          # Image for the liquid soap upgrade
+    /rubbingAlcohol.png      # Image for the rubbing alcohol upgrade
+    /shop1.png               # Image for the shop button icon
+    /soap.jpeg               # Image for the bar soap upgrade
+    /soap.jpg                # Image for the bar soap upgrade
+├── research                 # Folder for the research in the upgrade descriptions
+    /Handwashing_Facts.docx  # A Document for the research done
 ├── sounds                   # Folder for sounds
+    /hand_click.mp3          # Sound that plays when the hand is clicked
 ├── script                   # Folder for scripts
     /firebase_api.js         # Firebase file
     /gameplay.js             # All main gameplay functions involving the main page
     /leaderboard.js          # Users firebase to display a leaderboard
     /stats.js                # Uses firebase to display tracked user statistics
-    /user-customize.js        # Functions involving a more personalized experience for the user
+    /user-customize.js       # Functions involving a more personalized experience for the user
 ├── style                    # Folder for styles
     /landing-page.css        # Styling for the landing page
     /leaderboard.css         # Styling for the leaderboard page
