@@ -322,38 +322,6 @@ function createInitialGerms() {
     })
 }
 
-
-
-// ####################################################################
-// Functions to call when opening webpage
-// ####################################################################
-
-/* All the functions to be executed when the page is run.*/
-function gameStart() {
-    /* Decrease health bar at a constant rate*/
-    let timerRate = 15000;
-    setInterval(function () {
-        setHealth(-healthDecreaseRate);
-
-        if (healthValue > 0) {
-            createGerms(1);
-        }
-    }, timerRate);
-
-    displayScore();
-    displayHealth();
-    setHandEventListener();
-    // Sets the user's purchases and ability costs
-    abilityCosts("ability1", changeAbilityCosts);
-    abilityCosts("ability2", changeAbilityCosts);
-    abilityCosts("ability3", changeAbilityCosts);
-    abilityCosts("ability4", changeAbilityCosts);
-    abilityCosts("ability5", changeAbilityCosts);
-    abilityCosts("ability6", changeAbilityCosts);
-    abilityCosts("ability7", changeAbilityCosts);
-}
-
-
 // ####################################################################
 // Functions to show costs of different abilities
 // ####################################################################
@@ -688,4 +656,34 @@ function createButton(text, marginStart, ability) {
 
     confirm.appendChild(button);
 }
+
+// ####################################################################
+// Functions to call when opening webpage
+// ####################################################################
+
+/* All the functions to be executed when the page is run.*/
+function gameStart() {
+    /* Decrease health bar at a constant rate*/
+    let timerRate = 15000;
+    setInterval(function () {
+        setHealth(-healthDecreaseRate);
+
+        if (healthValue > 0) {
+            createGerms(1);
+        }
+    }, timerRate);
+
+    displayScore();
+    displayHealth();
+    setHandEventListener();
+    // Sets the user's purchases and ability costs
+    abilityCosts("ability1", changeAbilityCosts);
+    abilityCosts("ability2", changeAbilityCosts);
+    abilityCosts("ability3", changeAbilityCosts);
+    abilityCosts("ability4", changeAbilityCosts);
+    abilityCosts("ability5", changeAbilityCosts);
+    abilityCosts("ability6", changeAbilityCosts);
+    abilityCosts("ability7", changeAbilityCosts);
+}
+
 gameStart();
