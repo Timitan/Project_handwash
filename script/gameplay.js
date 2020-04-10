@@ -1,4 +1,6 @@
+// ####################################################################
 // Global Variables
+// ####################################################################
 let healthValue = 100;
 let healthDecreaseRate = 1;
 let clickGainHealthRate = 1;
@@ -12,9 +14,9 @@ let currentRateIncrease;
 let currentAbilityNewCost;
 let currentAbilityOwned;
 
-// A variable to indicate how much the score is increased by
-//let rate = 1;
-
+// ####################################################################
+// Displays the shop on the right side
+// ####################################################################
 function toggleShop() {
     let shopMenu = document.getElementById("mySideNav");
     let shopBtn = document.getElementById("shop-button");
@@ -32,10 +34,10 @@ function toggleShop() {
         shopBtn.style.opacity = "1";
     }
 }
+
 // ####################################################################
 // Functions for display health and updating firebase
 // ####################################################################
-
 function setHealth(value) {
     firebase.auth().onAuthStateChanged(function (user) {
         let userRef = db.collection('users').doc(user.uid);
@@ -50,7 +52,7 @@ function setHealth(value) {
                 userRef.update({
                     clicks: 0,
                     score: 0,
-                    rate: 1,
+                    rate: 3,
                     health: 100,
                     ability1: 0,
                     ability2: 0,
@@ -79,13 +81,31 @@ function setHealth(value) {
             });
     });
 }
+
+// ####################################################################
+// When the user loses all of their health, then they lose all of their
+// progress and must restart from the beginning
+// ####################################################################
 function loseTheGame(){
+    // Sets the user's purchases and ability costs
+    abilityCosts("ability1", changeAbilityCosts);
+    abilityCosts("ability2", changeAbilityCosts);
+    abilityCosts("ability3", changeAbilityCosts);
+    abilityCosts("ability4", changeAbilityCosts);
+    abilityCosts("ability5", changeAbilityCosts);
+    abilityCosts("ability6", changeAbilityCosts);
+    abilityCosts("ability7", changeAbilityCosts);
+
+    // Displays the message
     let centerPiece = document.getElementById("displayMessage");
+    document.getElementById("displayName").innerHTML = " You lost all of your HP.<br>Now you have to restart the game from the beginning.";
+    centerPiece.style.background = "rgba(185, 185, 185, 0.75)";
     centerPiece.style.display = "block";
-    //document.getElementById("closeButton").style.display = "inline";
-    centerPiece.innerHTML = "You lost all of your HP.<br>Now you have to restart the game from the beginning.";
 }
-// Grabs the health variable from the database and displays it
+
+// ####################################################################
+// Displays the health field within the database
+// ####################################################################
 function displayHealth() {
     firebase.auth().onAuthStateChanged(function (user) {
         // Gets the user's clicks
@@ -106,9 +126,9 @@ function displayHealth() {
 }
 
 // ####################################################################
-// Functions for displaying score and updating firebase
+// Displays the score on the top right and updates the field within the
+// firebase
 // ####################################################################
-
 function displayScore() {
     firebase.auth().onAuthStateChanged(function (user) {
         // Gets the user's clicks
@@ -136,16 +156,15 @@ function displayScore() {
     });
 }
 
+// ####################################################################
+// Changes the health and clicks field within the database
+// ####################################################################
 function changeHealthVariable() {
     clickSound.play();
     firebase.auth().onAuthStateChanged(function (user) {
         setHealth(clickGainHealthRate);
         userID = firebase.auth().currentUser.uid;
         let userRef = db.collection('users').doc(user.uid);
-        //userID = userRef;
-        /////Plays the sound/////
-        // Increment user's clicks and score
-        //let rate = db.collection("users/").doc(user.uid).data()["rate"];
         let incRate = firebase.firestore.FieldValue.increment(globalRate);
         let clickInc = firebase.firestore.FieldValue.increment(1);
         userRef.update({
@@ -161,8 +180,11 @@ function changeHealthVariable() {
     });
 }
 
+
+// ####################################################################
+// Event listener for whenever the hand is clicked
+// ####################################################################
 function setHandEventListener() {
-    // Adds an event listener to the hand when it is clicked
     document.getElementById("hand").addEventListener("mousedown", function () {
         removeGerm();
         changeHealthVariable();
@@ -235,6 +257,9 @@ function Germ(xPos, yPos, index) {
 }
 
 
+// ####################################################################
+// Creates new gerns to be displayed around the hand
+// ####################################################################
 function createGerms(num) {
     let elementArray = Array.from(document.getElementById("germContainer").children);
 
@@ -260,7 +285,9 @@ function createGerms(num) {
     }
 }
 
-// Remove the last germ element in the array from the document
+// ####################################################################
+// Removes the last germ in the array from th document
+// ####################################################################
 function removeGerm() {
     let elementArray = Array.from(document.getElementById("germContainer").children);
     if (elementArray.length != 0) {
@@ -269,7 +296,9 @@ function removeGerm() {
     }
 }
 
-// Creates the germs initially there on startup
+// ####################################################################
+// Creates the initial germs to be displayed on the screen
+// ####################################################################
 function createInitialGerms() {
     let germCount = 0;
     firebase.auth().onAuthStateChanged(user => {
@@ -331,6 +360,7 @@ function gameStart() {
 function abilityCosts(ability, callback) {
     firebase.auth().onAuthStateChanged(function (user) {
         db.collection("users/").doc(user.uid).get().then(function (d) {
+            // Gets all of the user's amount of abiliites owned
             let ability1 = d.data()["ability1"];
             let ability2 = d.data()["ability2"];
             let ability3 = d.data()["ability3"];
@@ -338,6 +368,8 @@ function abilityCosts(ability, callback) {
             let ability5 = d.data()["ability5"];
             let ability6 = d.data()["ability6"];
             let ability7 = d.data()["ability7"];
+            // Checks which ability has been selected
+            // Callback function for when the user logs back in again
             switch (ability) {
                 case ("ability1"):
                     if (ability1 == 0) {
@@ -366,6 +398,7 @@ function abilityCosts(ability, callback) {
                         currentAbilityNewCost = (Math.ceil(1000 * Math.pow(1.15, (ability2 + 1))));
                         currentAbilityOwned = ability2 + 1;
                         if (callback != undefined) {
+                            currentAbilityOwned = ability2;
                             callback("secondAbilityOwned", "secondAbilityCost");
                         }
                     }
@@ -380,20 +413,22 @@ function abilityCosts(ability, callback) {
                         currentAbilityNewCost = (Math.ceil(11000 * Math.pow(1.15, (ability3 + 1))));
                         currentAbilityOwned = ability3 + 1;
                         if (callback != undefined) {
+                            currentAbilityOwned = ability3;
                             callback("thirdAbilityOwned", "thirdAbilityCost");
                         }
                     }
                     break;
-                case ("ability5"):
+                case ("ability4"):
                     if (ability4 == 0) {
                         currentAbilityCost = 12000;
                         currentAbilityNewCost = (Math.ceil(120000 * Math.pow(1.15, ability4)));
                         currentAbilityOwned = 1;
                     } else {
                         currentAbilityCost = (Math.ceil(120000 * Math.pow(1.15, ability4)));
-                        currentAbilityNewCost = (Math.ceil(120000 * Math.pow(1.15, (ability5 + 1))));
+                        currentAbilityNewCost = (Math.ceil(120000 * Math.pow(1.15, (ability4 + 1))));
                         currentAbilityOwned = ability4 + 1;
                         if (callback != undefined) {
+                            currentAbilityOwned = ability4;
                             callback("fourthAbilityOwned", "fourthAbilityCost");
                         }
                     }
@@ -408,6 +443,7 @@ function abilityCosts(ability, callback) {
                         currentAbilityNewCost = (Math.ceil(1300000 * Math.pow(1.15, (ability5 + 1))));
                         currentAbilityOwned = ability5 + 1;
                         if (callback != undefined) {
+                            currentAbilityOwned = ability5;
                             callback("fifthAbilityOwned", "fifthAbilityCost");
                         }
                     }
@@ -422,6 +458,7 @@ function abilityCosts(ability, callback) {
                         currentAbilityNewCost = (Math.ceil(14000000 * Math.pow(1.15, (ability6 + 1))));
                         currentAbilityOwned = ability6 + 1;
                         if (callback != undefined) {
+                            currentAbilityOwned = ability6;
                             callback("sixthAbilityOwned", "sixthAbilityCost");
                         }
                     }
@@ -433,9 +470,10 @@ function abilityCosts(ability, callback) {
                         currentAbilityOwned = 1;
                     } else {
                         currentAbilityCost = (Math.ceil((200000000 * Math.pow(1.15, ability7))));
-                        currentAbilityNewCost = (Math.ceil(200000000 * Math.pow(1.15, (abilty7 + 1))));
+                        currentAbilityNewCost = (Math.ceil(200000000 * Math.pow(1.15, (ability7 + 1))));
                         currentAbilityOwned = ability7 + 1;
                         if (callback != undefined) {
+                            currentAbilityOwned = ability7;
                             callback("seventhAbilityOwned", "seventhAbilityCost");
                         }
                     }
@@ -458,7 +496,10 @@ function buyAbility(ability) {
     confirm.style.height = "50vh";
     confirm.style.display = "inline";
     confirm.style.zIndex = "2";
+    // Timeout so database can complete the abilityCosts function
+    // and get the values
     setTimeout(function(){
+        // Checks which ability has been clicked
         switch (ability) {
             case ("ability1"):
                 if (userScore < currentAbilityCost) {
@@ -476,8 +517,8 @@ function buyAbility(ability) {
                     createButton("Ok");
                 } else {
                     confirm.innerHTML = "Would you like to buy this ability?<br>";
-                    createButton("Yes", 10, ability, currentAbilityCost);
-                    createButton("No", 50);
+                    createButton("Yes", 5, ability, currentAbilityCost);
+                    createButton("No", 25);
                 }
                 break;
             case ("ability3"):
@@ -486,8 +527,8 @@ function buyAbility(ability) {
                     createButton("Ok");
                 } else {
                     confirm.innerHTML = "Would you like to buy this ability?<br>";
-                    createButton("Yes", 10, ability, currentAbilityCost);
-                    createButton("No", 50);
+                    createButton("Yes", 5, ability, currentAbilityCost);
+                    createButton("No", 25);
                 }
                 break;
             case ("ability4"):
@@ -496,8 +537,8 @@ function buyAbility(ability) {
                     createButton("Ok");
                 } else {
                     confirm.innerHTML = "Would you like to buy this ability?<br>";
-                    createButton("Yes", 10, ability, currentAbilityCost);
-                    createButton("No", 50);
+                    createButton("Yes", 5, ability, currentAbilityCost);
+                    createButton("No", 25);
                 }
                 break;
             case ("ability5"):
@@ -506,8 +547,8 @@ function buyAbility(ability) {
                     createButton("Ok");
                 } else {
                     confirm.innerHTML = "Would you like to buy this ability?<br>";
-                    createButton("Yes", 10, ability, currentAbilityCost);
-                    createButton("No", 50);
+                    createButton("Yes", 5, ability, currentAbilityCost);
+                    createButton("No", 25);
                 }
                 break;
             case ("ability6"):
@@ -516,8 +557,8 @@ function buyAbility(ability) {
                     createButton("Ok");
                 } else {
                     confirm.innerHTML = "Would you like to buy this ability?<br>";
-                    createButton("Yes", 50, ability, currentAbilityCost);
-                    createButton("No", 50);
+                    createButton("Yes", 5, ability, currentAbilityCost);
+                    createButton("No", 25);
                 }
                 break;
             case ("ability7"):
@@ -526,8 +567,8 @@ function buyAbility(ability) {
                     createButton("Ok");
                 } else {
                     confirm.innerHTML = "Would you like to buy this ability?<br>";
-                    createButton("Yes", 50, ability, currentAbilityCost);
-                    createButton("No", 50);
+                    createButton("Yes", 5, ability, currentAbilityCost);
+                    createButton("No", 25);
                 }
                 break;
         }
@@ -553,7 +594,11 @@ function changeAbilityNewCosts(ability, abilityCost){
     document.getElementById(ability).innerHTML = "Owned: " + currentAbilityOwned;
     document.getElementById(abilityCost).innerHTML = currentAbilityNewCost;
 }
-    //let increment = firebase.firestore.FieldValue.increment(rate);
+
+// ####################################################################
+// Creates the Yes, No, and Ok buttons when the user tries to buy an
+// ability within the shop
+// ####################################################################
 function createButton(text, marginStart, ability) {
     let confirm = document.getElementById("abilityConfirm");
     let button = document.createElement("button");
@@ -569,6 +614,7 @@ function createButton(text, marginStart, ability) {
                 let scoreDecrease = firebase.firestore.FieldValue.increment(currentAbilityCost * -1);
                 let fieldVal = firebase.firestore.FieldValue;
                 let userRef = db.collection('users').doc(user.uid);
+                // Checks which ability has been clicked
                 switch (ability) {
                     case ("ability1"):
                         changeAbilityNewCosts("firstAbilityOwned", "firstAbilityCost");
