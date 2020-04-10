@@ -316,7 +316,7 @@ function gameStart() {
     setHandEventListener();
     // Sets the user's purchases and ability costs
     abilityCosts("ability1", changeAbilityCosts);
-    abilityCosts("ability2", changeAbilitycosts);
+    abilityCosts("ability2", changeAbilityCosts);
     abilityCosts("ability3", changeAbilityCosts);
     abilityCosts("ability4", changeAbilityCosts);
     abilityCosts("ability5", changeAbilityCosts);
