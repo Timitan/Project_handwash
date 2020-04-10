@@ -182,7 +182,7 @@ function Germ(xPos, yPos, index) {
 
     // Creates an id from 0 - 100
     this.germObj.id = "germImg" + index;
-    this.germObj.src = "images/germ7.gif";
+    this.germObj.src = "images/germ.gif";
 
     // Creates a div to put the germs in
     this.div.id = index + "div";
