@@ -314,13 +314,21 @@ function gameStart() {
     displayScore();
     displayHealth();
     setHandEventListener();
+    // Sets the user's purchases and ability costs
+    abilityCosts("ability1", changeAbilityCosts);
+    abilityCosts("ability2", changeAbilitycosts);
+    abilityCosts("ability3", changeAbilityCosts);
+    abilityCosts("ability4", changeAbilityCosts);
+    abilityCosts("ability5", changeAbilityCosts);
+    abilityCosts("ability6", changeAbilityCosts);
+    abilityCosts("ability7", changeAbilityCosts);
 }
 
 
 // ####################################################################
 // Functions to show costs of different abilities
 // ####################################################################
-function abilityCosts(ability, cost) {
+function abilityCosts(ability, callback) {
     firebase.auth().onAuthStateChanged(function (user) {
         db.collection("users/").doc(user.uid).get().then(function (d) {
             let ability1 = d.data()["ability1"];
@@ -333,79 +341,103 @@ function abilityCosts(ability, cost) {
             switch (ability) {
                 case ("ability1"):
                     if (ability1 == 0) {
-                        currentAbilityCost = 15;
-                        currentAbilityNewCost = (Math.ceil(15 * Math.pow(1.15, ability1)));
+                        currentAbilityCost = 150;
+                        currentAbilityNewCost = (Math.ceil(150 * Math.pow(1.15, ability1)));
                         currentAbilityOwned = 1;
                     } else {
-                        currentAbilityCost = (Math.ceil(15 * Math.pow(1.15, ability1)));
-                        currentAbilityNewCost = (Math.ceil(15 * Math.pow(1.15, (ability1 + 1))));
+                        currentAbilityCost = (Math.ceil(150 * Math.pow(1.15, ability1)));
+                        currentAbilityNewCost = (Math.ceil(150 * Math.pow(1.15, (ability1 + 1))));
                         currentAbilityOwned = ability1 + 1;
+                        if (callback != undefined){
+                            currentAbilityOwned = ability1;
+                            if (callback != undefined) {
+                                callback("firstAbilityOwned", "firstAbilityCost");
+                            }
+                        }
                     }
                     break;
                 case ("ability2"):
                     if (ability2 == 0) {
-                        currentAbilityCost = 100;
-                        currentAbilityNewCost = (Math.cel(100 * Math.pow(1.15, ability2)));
+                        currentAbilityCost = 1000;
+                        currentAbilityNewCost = (Math.ceil(1000 * Math.pow(1.15, ability2)));
                         currentAbilityOwned = 1;
                     } else {
-                        currentAbilityCost = (Math.ceil(100 * Math.pow(1.15, ability2)));
-                        currentAbilityNewCost = (Math.ceil(100 * Math.pow(1.15, (ability2 + 1))));
+                        currentAbilityCost = (Math.ceil(1000 * Math.pow(1.15, ability2)));
+                        currentAbilityNewCost = (Math.ceil(1000 * Math.pow(1.15, (ability2 + 1))));
                         currentAbilityOwned = ability2 + 1;
+                        if (callback != undefined) {
+                            callback("secondAbilityOwned", "secondAbilityCost");
+                        }
                     }
                     break;
                 case ("ability3"):
                     if (ability3 == 0) {
-                        currentAbilityCost = 1100;
-                        currentAbilityNewCost = (Math.ceil(1100 * Math.pow(1.15, ability3)));
+                        currentAbilityCost = 11000;
+                        currentAbilityNewCost = (Math.ceil(11000 * Math.pow(1.15, ability3)));
                         currentAbilityOwned = 1;
                     } else {
-                        currentAbilityCost = (Math.ceil(1100 * Math.pow(1.15, ability3)));
-                        currentAbilityNewCost = (Math.ceil(1100 * Math.pow(1.15, (ability3 + 1))));
+                        currentAbilityCost = (Math.ceil(11000 * Math.pow(1.15, ability3)));
+                        currentAbilityNewCost = (Math.ceil(11000 * Math.pow(1.15, (ability3 + 1))));
                         currentAbilityOwned = ability3 + 1;
+                        if (callback != undefined) {
+                            callback("thirdAbilityOwned", "thirdAbilityCost");
+                        }
                     }
                     break;
                 case ("ability5"):
                     if (ability4 == 0) {
                         currentAbilityCost = 12000;
-                        currentAbilityNewCost = (Math.ceil(12000 * Math.pow(1.15, ability4)));
+                        currentAbilityNewCost = (Math.ceil(120000 * Math.pow(1.15, ability4)));
                         currentAbilityOwned = 1;
                     } else {
-                        currentAbilityCost = (Math.ceil(12000 * Math.pow(1.15, ability4)));
-                        currentAbilityNewCost = (Math.ceil(12000 * Math.pow(1.15, (ability5 + 1))));
+                        currentAbilityCost = (Math.ceil(120000 * Math.pow(1.15, ability4)));
+                        currentAbilityNewCost = (Math.ceil(120000 * Math.pow(1.15, (ability5 + 1))));
                         currentAbilityOwned = ability4 + 1;
+                        if (callback != undefined) {
+                            callback("fourthAbilityOwned", "fourthAbilityCost");
+                        }
                     }
                     break;
                 case ("ability5"):
                     if (ability5 == 0) {
-                        currentAbilityCost = 130000;
-                        currentAbilityNewCost = (Math.ceil(130000 * Math.pow(1.15, ability5)))
+                        currentAbilityCost = 1300000;
+                        currentAbilityNewCost = (Math.ceil(1300000 * Math.pow(1.15, ability5)))
                         currentAbilityOwned = 1;
                     } else {
-                        currentAbilityCost = (Math.ceil(130000 * Math.pow(1.15, ability5)));
-                        currentAbilityNewCost = (Math.ceil(130000 * Math.pow(1.15, (ability5 + 1))));
+                        currentAbilityCost = (Math.ceil(1300000 * Math.pow(1.15, ability5)));
+                        currentAbilityNewCost = (Math.ceil(1300000 * Math.pow(1.15, (ability5 + 1))));
                         currentAbilityOwned = ability5 + 1;
+                        if (callback != undefined) {
+                            callback("fifthAbilityOwned", "fifthAbilityCost");
+                        }
                     }
                     break;
                 case ("ability6"):
                     if (ability6 == 0) {
-                        currentAbilityCost = 1400000;
-                        currentAbilityNewCost = (Math.ceil(1400000 * Math.pow(1.15, ability6)));
+                        currentAbilityCost = 14000000;
+                        currentAbilityNewCost = (Math.ceil(14000000 * Math.pow(1.15, ability6)));
                         currentAbilityOwned = 1;
                     } else {
-                        currentAbilityCost = (Math.ceil(1400000 * Math.pow(1.15, ability6)));
-                        currentAbilityNewCost = (Math.ceil(1400000 * Math.pow(1.15, (ability6 + 1))));
+                        currentAbilityCost = (Math.ceil(14000000 * Math.pow(1.15, ability6)));
+                        currentAbilityNewCost = (Math.ceil(14000000 * Math.pow(1.15, (ability6 + 1))));
                         currentAbilityOwned = ability6 + 1;
+                        if (callback != undefined) {
+                            callback("sixthAbilityOwned", "sixthAbilityCost");
+                        }
                     }
                     break;
                 case ("ability7"):
                     if (ability7 == 0) {
-                        currentAbilityCost = 20000000;
-                        currentAbilityNewCost = (Math.ceil((20000000 * Math.pow(1.15, ability7))));
+                        currentAbilityCost = 200000000;
+                        currentAbilityNewCost = (Math.ceil((200000000 * Math.pow(1.15, ability7))));
                         currentAbilityOwned = 1;
                     } else {
-                        currentAbilityCost = (Math.ceil((20000000 * Math.pow(1.15, ability7))));
-                        currentAbilityNewCost = (Math.ceil(20000000 * Math.pow(1.15, (abilty7 + 1))));
+                        currentAbilityCost = (Math.ceil((200000000 * Math.pow(1.15, ability7))));
+                        currentAbilityNewCost = (Math.ceil(200000000 * Math.pow(1.15, (abilty7 + 1))));
                         currentAbilityOwned = ability7 + 1;
+                        if (callback != undefined) {
+                            callback("seventhAbilityOwned", "seventhAbilityCost");
+                        }
                     }
                     break;
             }
@@ -419,24 +451,13 @@ function abilityCosts(ability, cost) {
 // Function  to buy abilities
 // ####################################################################
 function buyAbility(ability) {
-    // this method isnt working yet
-    // purchasing abilities only works once of the fields change cause i dont know how to set it up so it sets the userID on load
-    // im using the firebase.auth().OnAuthChanged but i dont know a replacement for this
     abilityCosts(ability);
-    //userID = firebase.auth().currentUser.uid;
     let confirm = document.getElementById("abilityConfirm");
     //createButton("No", 50, 50, "red");
     confirm.style.width = "100vw";
     confirm.style.height = "50vh";
     confirm.style.display = "inline";
     confirm.style.zIndex = "2";
-    /** Checks which ability has been clicked and then checks if the user has enough points for the purchase
-     *  If the user has enough points, they are prompted with whether or not they wish to purchase the ability
-     *  if the user says yes then the ability is incremented by one and the score decremented by the 
-     *  price of the ability 
-     */
-    // wont work yet since abilityPrice returns nothing
-    // buttons are ugly
     setTimeout(function(){
         switch (ability) {
             case ("ability1"):
@@ -514,6 +535,24 @@ function buyAbility(ability) {
   
 }
 
+
+// ####################################################################
+// Function to change the ability costs and owned according to the
+// user's purchases when game starts
+// ####################################################################
+function changeAbilityCosts(ability, abilityCost){
+    document.getElementById(ability).innerHTML = "Owned: " + currentAbilityOwned;
+    document.getElementById(abilityCost).innerHTML = currentAbilityCost;
+}
+
+// ####################################################################
+// Function to change the abilities costs and owned when an ability 
+// is bought.
+// ####################################################################
+function changeAbilityNewCosts(ability, abilityCost){
+    document.getElementById(ability).innerHTML = "Owned: " + currentAbilityOwned;
+    document.getElementById(abilityCost).innerHTML = currentAbilityNewCost;
+}
     //let increment = firebase.firestore.FieldValue.increment(rate);
 function createButton(text, marginStart, ability) {
     let confirm = document.getElementById("abilityConfirm");
@@ -532,58 +571,59 @@ function createButton(text, marginStart, ability) {
                 let userRef = db.collection('users').doc(user.uid);
                 switch (ability) {
                     case ("ability1"):
-                        document.getElementById("firstAbilityCost").innerHTML = currentAbilityNewCost;
-                        document.getElementById("firstAbilityOwned").innerHTML = "Owned: " + currentAbilityOwned;
+                        changeAbilityNewCosts("firstAbilityOwned", "firstAbilityCost");
                         userRef.update({
                             ability1: plusOne,
-                            score: scoreDecrease,
-                            rate: fieldVal.increment(0.1)
-                        });
-                        break;
-                    case ("ability2"):
-                        document.getElementById("secondAbilityCost").innerHTML = currentAbilityNewCost;
-                        document.getElementById("secondAbilityOwned").innerHTML = "Owned: " + currentAbilityOwned;
-                        userRef.update({
-                            ability2: plusOne,
                             score: scoreDecrease,
                             rate: fieldVal.increment(1)
                         });
                         break;
+                    case ("ability2"):
+                        changeAbilityNewCosts("secondAbilityOwned", "secondAbilityCost");
+                        userRef.update({
+                            ability2: plusOne,
+                            score: scoreDecrease,
+                            rate: fieldVal.increment(10)
+                        });
+                        break;
                     case ("ability3"):
-                        document.getElementById("thirdAbilityCost").innerHTML = currentAbilityNewCost;
-                        document.getElementById("thirdAbilityOwned").innerHTML = "Owned: " + currentAbilityOwned;
+                        changeAbilityNewCosts("thirdAbilityOwned", "thirdAbilityCost");
                         userRef.update({
                             ability3: plusOne,
                             score: scoreDecrease,
-                            rate: fieldVal.increment(8)
+                            rate: fieldVal.increment(80)
                         });
                         break;
                     case ("ability4"):
+                        changeAbilityNewCosts("fourthAbilityOwned", "fourthtAbilityCost");
                         userRef.update({
                             ability4: plusOne,
                             score: scoreDecrease,
-                            rate: fieldVal.increment(47)
+                            rate: fieldVal.increment(470)
                         });
                         break;
                     case ("ability5"):
+                        changeAbilityNewCosts("fifthAbilityOwned", "fifthAbilityCost");
                         userRef.update({
                             ability5: plusOne,
                             score: scoreDecrease,
-                            rate: fieldVal.increment(1400)
+                            rate: fieldVal.increment(14000)
                         });
                         break;
                     case ("ability6"):
+                        changeAbilityNewCosts("sixthAbilityOwned", "sixthAbilityCost");
                         userRef.update({
                             ability6: plusOne,
                             score: scoreDecrease,
-                            rate: fieldVal.increment(7800)
+                            rate: fieldVal.increment(78000)
                         });
                         break;
                     case ("ability7"):
+                        changeAbilityNewCosts("seventhAbilityOwned", "seventhAbilityCost");
                         userRef.update({
                             ability7: plusOne,
                             score: scoreDecrease,
-                            rate: fieldVal.increment(44000)
+                            rate: fieldVal.increment(440000)
                         });
                         break;
                 }
