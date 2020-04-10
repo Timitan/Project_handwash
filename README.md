@@ -64,6 +64,7 @@ Contains the following subfolders:
     /handSanitizer.jpg       # Image of the hand sanitizer upgrade
     /handicon.png            # Image of a hand icon
     /liquidSoap.png          # Image for the liquid soap upgrade
+    /radiation.png	     # Image for the radiation upgrade
     /rubbingAlcohol.png      # Image for the rubbing alcohol upgrade
     /shop.png                # Image for the shop button icon
     /soap.jpeg               # Image for the bar soap upgrade
